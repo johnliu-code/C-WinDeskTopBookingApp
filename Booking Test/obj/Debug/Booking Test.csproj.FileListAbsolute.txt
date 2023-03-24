@@ -1,0 +1,26 @@
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\Booking Test.exe.config
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\Booking Test.exe
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\Booking Test.pdb
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.csproj.AssemblyReference.cache
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.csproj.SuggestedBindingRedirects.cache
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\MainWindow.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\LoginView.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\App.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test_MarkupCompile.cache
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test_MarkupCompile.lref
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\MainWindow.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\LoginView.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.g.resources
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking_Test.Properties.Resources.resources
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.csproj.GenerateResource.cache
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.csproj.CoreCompileInputs.cache
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.exe
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.pdb
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\CustomControls\BindablePasswordBox.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\CustomControls\BindablePasswordBox.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\MainView.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\MainView.baml
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\MotelBookingMSDb.mdf
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\MotelBookingMSDb_log.ldf
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test_Content.g.cs

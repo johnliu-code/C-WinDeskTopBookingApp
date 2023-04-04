@@ -24,3 +24,12 @@ D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\MainView.baml
 D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\MotelBookingMSDb.mdf
 D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\MotelBookingMSDb_log.ldf
 D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test_Content.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Styles\UIColors.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\App.baml
+D:\CODE\BProjects\Booking Test\Booking Test\bin\Debug\FontAwesome.Sharp.dll
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Styles\ButtonStyles.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\Booking Test.csproj.CopyComplete
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\CustomerView.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\HomeView.g.cs
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\CustomerView.baml
+D:\CODE\BProjects\Booking Test\Booking Test\obj\Debug\View\HomeView.baml

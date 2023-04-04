@@ -31,20 +31,20 @@
             <ImageBrush ImageSource="/images/bg.jpg" />
         </Border.Background>
 
-        <Border CornerRadius="20"
+        <Border CornerRadius="10"
                 BorderThickness="5"
                 Opacity="0.95">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                    <GradientStop Color="Aqua" Offset="0" />
-                    <GradientStop Color="Purple" Offset="0.5" />
-                    <GradientStop Color="OrangeRed" Offset="1" />
+                    <GradientStop Color="{StaticResource winBorderColor1}" Offset="0" />
+                    <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.5" />
+                    <GradientStop Color="{StaticResource winBorderColor3}" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                    <GradientStop Color="#000052" Offset="0" />
-                    <GradientStop Color="#060531" Offset="0.75" />
+                    <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0" />
+                    <GradientStop Color="{StaticResource primaryBackColor2}" Offset="0.75" />
                 </LinearGradientBrush>
             </Border.Background>
 

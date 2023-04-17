@@ -190,6 +190,7 @@
     <Resource Include="images\profile.png" />
     <Resource Include="images\user-solid.svg" />
     <Resource Include="images\DashboardTemplate.png" />
+    <Resource Include="Document_reference\UserConfig.txt" />
     <Content Include="MotelBookingMSDb.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

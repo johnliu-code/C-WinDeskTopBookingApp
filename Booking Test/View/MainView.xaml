@@ -235,6 +235,7 @@
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         
@@ -256,9 +257,50 @@
                                        VerticalAlignment="Center"/>
 
                         </StackPanel>
-                        
-                        <!--User options-->
+
+                        <!--Caption-->
                         <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal">
+                            <Menu Background="Transparent" VerticalAlignment="Center">
+                                <Menu.ItemsPanel>
+
+                                    <ItemsPanelTemplate>
+
+                                        <VirtualizingStackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                                    </ItemsPanelTemplate>
+
+                                </Menu.ItemsPanel>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Users" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}">
+
+                                </MenuItem>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Functions" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}">
+
+                                </MenuItem>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Integrations" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}">
+
+                                </MenuItem>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Help" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}">
+
+                                </MenuItem>
+                            </Menu>
+
+                        </StackPanel>
+
+                        <!--User options-->
+                        <StackPanel Grid.Column="2"
                                     Orientation="Horizontal"
                                     FlowDirection="RightToLeft"
                                     VerticalAlignment="Center"

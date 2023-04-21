@@ -20,6 +20,7 @@ namespace Booking_Test
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
             {
+                //Login success with valid user
                 if (loginView.IsVisible == false && loginView.IsLoaded)
                 {
                     var mainView = new MainView();

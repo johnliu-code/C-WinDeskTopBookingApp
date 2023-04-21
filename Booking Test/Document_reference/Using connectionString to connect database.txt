@@ -1,0 +1,29 @@
+   Using connectionString to connect local database SQL Server
+
+   1. create string variable with name in app.config and then use it with the name
+
+    ******* Code in app.config **********
+    <connectionStrings>
+        <add name="dbConnection"
+            connectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=NorthwindStore;Integrated Security=True"
+            providerName="System.Data.SqlClient" />
+    </connectionStrings>
+
+    ********** Code in file with connectionString ************
+
+    _connectionString = ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
+
+
+
+    2. Direct set the connectionString within file, without app.config settings
+
+    SqlConnection conn = new SqlConnection("Server = (localdb)\\MSSQLLocalDB; Database = NorthwindStore; Integrated Security = true");
+
+
+
+    this will auto connect to the database
+
+
+###################################### CRUD operations ##########################################
+
+CRUD Operations will use SqlCommand and SqlConnnection to create and excute the query with parameters to get data values from .NET projects.

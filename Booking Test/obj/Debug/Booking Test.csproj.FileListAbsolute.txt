@@ -97,3 +97,6 @@ E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test.cspr
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test.csproj.CopyComplete
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test.exe
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test.pdb
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test_Content.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.baml

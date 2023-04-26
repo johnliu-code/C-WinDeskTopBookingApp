@@ -88,6 +88,7 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="View\CustomerView.xaml.cs">
@@ -101,6 +102,9 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -139,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +206,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Document_reference\Using connectionString to connect database.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Document_reference\DB\CreditCard.sql" />
+    <Content Include="Document_reference\DB\Customer.sql" />
+    <Content Include="Document_reference\DB\Invoice.sql" />
+    <Content Include="Document_reference\DB\Period.sql" />
+    <Content Include="Document_reference\DB\Rate.sql" />
+    <Content Include="Document_reference\DB\RateAdjustment.sql" />
+    <Content Include="Document_reference\DB\Reservation.sql" />
+    <Content Include="Document_reference\DB\Room.sql" />
+    <Content Include="Document_reference\DB\Season.sql" />
+    <Content Include="Document_reference\DB\Spend.sql" />
+    <Content Include="Document_reference\DB\Tax.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

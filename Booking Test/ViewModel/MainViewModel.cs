@@ -64,6 +64,7 @@ namespace Booking_Test.ViewModel
         //--> Commands
         public ICommand ShowHomeViewCommand {get;}
         public ICommand ShowCustomerViewCommand { get; }
+        public ICommand ShowUsersViewCommand { get; }
 
         public MainViewModel()
         {
@@ -73,6 +74,7 @@ namespace Booking_Test.ViewModel
             //Initialize commands
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+            ShowUsersViewCommand = new ViewModelCommand(ExecuteShowUsersViewCommand);
 
             //Default view
             ExecuteShowHomeViewCommand(null);
@@ -80,11 +82,18 @@ namespace Booking_Test.ViewModel
             LoadCurrentUserData();
         }
 
+        private void ExecuteShowUsersViewCommand(object obj)
+        {
+            CurrentChildView = new UsersViewModel();
+            Caption = "Users";
+            Icon = IconChar.UserGroup;
+        }
+
         private void ExecuteShowCustomerViewCommand(object obj)
         {
             CurrentChildView = new CustomerViewModel();
-            Caption = "Customer";
-            Icon = IconChar.UserGroup;
+            Caption = "Reservation";
+            Icon = IconChar.PhoneVolume;
         }
 
         private void ExecuteShowHomeViewCommand(object obj)
@@ -99,7 +108,6 @@ namespace Booking_Test.ViewModel
             var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
             {
-
                 CurrentUserAccount.UserName = user.Username;
                 CurrentUserAccount.Displayname = $"{user.Username}, {user.Roll}";
                 CurrentUserAccount.ProfilePicture = null;

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using Booking_Test.ViewModel;
 
 namespace Booking_Test.View
 {
@@ -25,6 +26,7 @@ namespace Booking_Test.View
         {
             InitializeComponent();
             this.MaxHeight=SystemParameters.MaximizedPrimaryScreenHeight;
+            DataContext = new MainViewModel();
         }
 
         [DllImport("user32.dll")]

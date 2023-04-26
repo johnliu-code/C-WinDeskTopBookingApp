@@ -11,6 +11,7 @@ namespace Booking_Test.Repositories
     public abstract class RepositoryBase
     {
         private readonly string _connectionString;
+   
         public RepositoryBase()
         {
             //_connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MotelBookingMSDb;Integrated Security=true";

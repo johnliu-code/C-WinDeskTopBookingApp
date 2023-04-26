@@ -86,6 +86,8 @@ namespace Booking_Test.ViewModel
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
+
+
           
         // Constructor
         public LoginViewModel()

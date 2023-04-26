@@ -6,23 +6,27 @@
              xmlns:local="clr-namespace:Booking_Test.View"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:vm="clr-namespace:Booking_Test.ViewModel"             
+             d:DataContext="{d:DesignInstance vm:CustomerViewModel}"
+             
+          >    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="180"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top"
                         Grid.Column="0">
-                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
-                <TextBox Text="Search..."   
+             <!--   <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
+                <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"   
                     FontSize="13"
                          Height="24"
                            Width="300"
@@ -34,48 +38,37 @@
                              BorderBrush="{StaticResource plainTextColor3}"
                              BorderThickness="0,0,0,1"                             
                              VerticalContentAlignment="Center"
-                             Margin="5,5,0,0"></TextBox>
+                             Margin="5,5,0,0" 
+                              >
+                </TextBox>  -->
+
             </StackPanel>
             <Button Grid.Column="1"
-                            Command="{Binding LoginCommand}"                            
-                            Content="Search"                            
+                            Command="{Binding ShowAllReservationCommand}"                            
+                            Content="Search All Reservations"                            
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"
                             BorderThickness="0"
-                            Foreground="White"
-                    VerticalAlignment="Top">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#773DFF"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Height="30"
-                                                    CornerRadius="15"
-                                                    Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#836EFB"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                            
+                    VerticalAlignment="Top"
+                    Style="{StaticResource reservationButton}">
+                
             </Button>
         </Grid>
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
                 Padding="10">
-            <DataGrid ColumnWidth="*"
+            <DataGrid x:Name="reservationListDataGrid"
+                ColumnWidth="*"
                   Background="#200F53"
-                  BorderThickness="0">
+                  BorderThickness="0"
+                  ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
+                      AutoGenerateColumns="False"
+                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                     
+                      >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -86,14 +79,77 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="ID" HeaderStringFormat=""/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="First name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Last name"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Phone"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Number"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Address"/>
+                    <DataGridTextColumn Binding="{Binding ReservationId}" Header="Reservation ID" />
+                    <DataGridTextColumn Binding="{Binding Firstname}" Header="First name"/>
+                    <DataGridTextColumn Binding="{Binding Lastname}"  Header="Last name"/>
+                    <DataGridTextColumn Binding="{Binding Number}"  Header="Number"/>
+                    <DataGridTextColumn Binding="{Binding Phone}"  Header="Phone"/>
+                    <DataGridTextColumn Binding="{Binding Email}"  Header="Email"/>
+                    <DataGridTextColumn Binding="{Binding Address}"  Header="Address"/>
+                    <DataGridTextColumn Binding="{Binding RoomNumber}"  Header="RoomNumber"/>
                 </DataGrid.Columns>
             </DataGrid>
+           
         </Border>
+        <Grid Grid.Row="2">
+                      
+                  <Grid.RowDefinitions>
+                      <RowDefinition  Height="*"/>
+                      <RowDefinition  Height="*"/>
+                      <RowDefinition  Height="*"/>
+                      <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                  </Grid.RowDefinitions>
+                  
+                  <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="2*" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="2*"/>
+                      <ColumnDefinition Width="2*"/>
+
+                </Grid.ColumnDefinitions>
+                  
+                  <TextBlock  Grid.Row="0" Grid.Column="0"  x:Name="textBlockLastName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                         Text="Last Name :" VerticalAlignment="Center" Width="66" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"  />
+                  <TextBlock  Grid.Row="1" Grid.Column="0" x:Name="textBlockAddress" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Address :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  <TextBlock  Grid.Row="2" Grid.Column="0" x:Name="textBlockNumber" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Number :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  <TextBlock  Grid.Row="3" Grid.Column="0" x:Name="textBlockRoomNumber" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Room Number :"  VerticalAlignment="Center" Width="86" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  <TextBlock  Grid.Row="4" Grid.Column="0" x:Name="textBlockNotes" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Notes :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  
+                  <!-- -->
+                  <TextBlock Grid.Row="0" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockFirstName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="First Name :" VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  <TextBlock Grid.Row="1" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="Email :" VerticalAlignment="Center" Width="54" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                  <TextBlock Grid.Row="2" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPhone" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Phone :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxRoomNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" />
+                  <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" x:Name="textBoxNotes" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" VerticalScrollBarVisibility="Visible" Width="590" Height="50" />
+                  <!-- -->
+            <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBoxFirstName" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23"  Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="1" Grid.Column="3" x:Name="textBoxEmail" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="2" Grid.Column="3" x:Name="textBoxPhone" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Grid.Row="0" Grid.Column="4" x:Name="btnSearch" Content="Search" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding ShowReservationCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="1" Grid.Column="4" x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center"  Width="100" Height="30"  Command="{Binding AddReservationCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="2" Grid.Column="4" x:Name="btnModify" Content="Modify" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30"   Command="{Binding ModifyReservationCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="3" Grid.Column="4" x:Name="btnDelete" Content="Delete" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding DeleteReservationCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="4" Grid.Column="4" x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding ClearInputsCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="5" Grid.Column="4" x:Name="btnQuit" Content="Quit" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding QuitReservationCommand}" Style="{StaticResource reservationButton}"/>
+        </Grid>
+
     </Grid>
+      
+            
+    
 </UserControl>

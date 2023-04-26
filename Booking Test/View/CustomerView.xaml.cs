@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Booking_Test.ViewModel;
 
 namespace Booking_Test.View
 {
@@ -23,6 +24,9 @@ namespace Booking_Test.View
         public CustomerView()
         {
             InitializeComponent();
+            DataContext = new CustomerViewModel();
         }
+
     }
+    
 }

@@ -18,11 +18,8 @@ namespace Booking_Test.ViewModel
         // Fields
         private UserModel _user;
         private UserModel _selecteduser;
-        private UserModel _currentuser;
         private ObservableCollection<UserModel> _users;
         private string search_username;
-
-
         private IUserRepository userRepository;
 
         // Properties
@@ -89,7 +86,6 @@ namespace Booking_Test.ViewModel
             ClearFieldsCommand = new ViewModelCommand(ExecuteClearFieldsCommand);
 
             LoadAllUsersData();
-
         }
 
         private void ExecuteClearFieldsCommand(object obj)
@@ -109,9 +105,12 @@ namespace Booking_Test.ViewModel
         }
 
         private void ExecuteDeleteUserCommand(object obj)
-        {
-            userRepository.Remove(User.Id);
-            LoadAllUsersData();
+
+        { if (SelectedUser != null || User != null)
+            {
+                userRepository.Remove(User.Id);
+                LoadAllUsersData();
+            }       
         }
 
         private void ExecuteUpdateUserCommand(object obj)

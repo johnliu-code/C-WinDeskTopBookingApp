@@ -100,3 +100,5 @@ E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test.pdb
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\Booking Test_Content.g.cs
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.g.cs
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationView.baml

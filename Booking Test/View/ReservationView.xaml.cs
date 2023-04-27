@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace Booking_Test.View
 {
     /// <summary>
-    /// Interaction logic for CustomerView.xaml
+    /// Interaction logic for ReservationView.xaml
     /// </summary>
-    public partial class CustomerView : UserControl
+    public partial class ReservationView : UserControl
     {
-        public CustomerView()
+        public ReservationView()
         {
             InitializeComponent();
             DataContext = new CustomerViewModel();

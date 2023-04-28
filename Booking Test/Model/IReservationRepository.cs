@@ -14,7 +14,7 @@ namespace Booking_Test.Model
         void Remove(Guid reservationid);
         ReservationModel GetByReservationId(Guid reservationid);
         //ReservationModel GetByReservationUsername(string firstname, string lastname);
-        ObservableCollection<ReservationModel> GetByReservationUsername(string firstname);
+        ObservableCollection<ReservationModel> GetByCustomerId(int id);
         ObservableCollection<ReservationModel> GetAll();
         ObservableCollection<ReservationModel> Clear();
     }

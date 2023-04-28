@@ -64,8 +64,7 @@
                   BorderThickness="0"
                   ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
                       AutoGenerateColumns="False"
-                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-                     
+                      SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
                       >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">

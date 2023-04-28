@@ -17,32 +17,15 @@ namespace Booking_Test.ViewModel
     public class CustomerViewModel : ViewModelBase
     {
 
-        //Fields     
-        public int _reservationId;
-        public string _firstname;
-        public string _lastname;
-        public int _number;
-        public string _phone;
-        public string _email;
-        public string _address;
-        public int _roomNumber;
-        private ReservationModel _currentReservation;
+        //Fields
+        private CustomerModel _customer;
+        private CustomerModel _currentCustomer;
         private ReservationModel _selectedItem;
 
         private IReservationRepository reservationRepository;
         private ViewModelBase _currentView;
 
         // Properties
-
-        public ViewModelBase CurrentView
-        {
-            get => _currentView;
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
-            }
-        }
 
         public ReservationModel SelectedItem
         {
@@ -55,13 +38,7 @@ namespace Booking_Test.ViewModel
                     OnPropertyChanged(nameof(SelectedItem));
                     if (SelectedItem != null)
                     {
-                        Firstname = _selectedItem.Firstname;
-                        Lastname = _selectedItem.Lastname;
-                        Phone = _selectedItem.Phone;
-                        Email = _selectedItem.Email;
-                        Address = _selectedItem.Address;
-                        RoomNumber = _selectedItem.RoomNumber;
-                        Number = _selectedItem.Number;
+                        Reservation = SelectedItem;
                     }
                 }
             }
@@ -79,86 +56,16 @@ namespace Booking_Test.ViewModel
             }
         }
 
-        public int ReservationId
+        public ReservationModel Reservation
         {
-            get => _reservationId;
+            get => _reservation;
             set
             {
-                _reservationId = value;
-                OnPropertyChanged(nameof(ReservationId));
+                _reservation = value;
+                OnPropertyChanged(nameof(Reservation));
             }
         }
-
-        public string Firstname
-        {
-            get => _firstname;
-            set
-            {
-                _firstname = value;
-                OnPropertyChanged(nameof(Firstname));
-            }
-        }
-        public string Lastname
-        {
-            get => _lastname;
-            set
-            {
-                _lastname = value;
-                OnPropertyChanged(nameof(Lastname));
-            }
-        }
-
-        public string Phone
-        {
-            get => _phone;
-            set
-            {
-                _phone = value;
-                OnPropertyChanged(nameof(Phone));
-            }
-        }
-
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
-
-        public string Address
-        {
-            get => _address;
-            set
-            {
-                _address = value;
-                OnPropertyChanged(nameof(Address));
-            }
-        }
-
-        public int Number
-        {
-            get => _number;
-            set
-            {
-                _number = value;
-                OnPropertyChanged(nameof(Number));
-            }
-        }
-
-        public int RoomNumber
-        {
-            get => _roomNumber;
-            set
-            {
-                _roomNumber = value;
-                OnPropertyChanged(nameof(RoomNumber));
-            }
-        }
-
-
+      
         public ObservableCollection<ReservationModel> Reservations { get; set; }
         public ObservableCollection<ReservationModel> ReservationsAll { get; set; }
 
@@ -196,7 +103,7 @@ namespace Booking_Test.ViewModel
         {
             if (SelectedItem != null)
             {
-                var reservationSearchedId = SelectedItem.ReservationId;
+                var reservationSearchedId = SelectedItem.Id;
 
                 reservationRepository.Remove(reservationSearchedId);
 
@@ -208,14 +115,8 @@ namespace Booking_Test.ViewModel
         {
             if (SelectedItem != null)
             {
-                var reservationSearchedId = SelectedItem.ReservationId;
-                CurrentReservation.Firstname = Firstname;
-                CurrentReservation.Lastname = Lastname;
-                CurrentReservation.Number = Number;
-                CurrentReservation.Phone = Phone;
-                CurrentReservation.Email = Email;
-                CurrentReservation.Address = Address;
-                CurrentReservation.RoomNumber = RoomNumber;
+                var reservationSearchedId = SelectedItem.Id;
+                CurrentReservation = Reservation;
 
                 reservationRepository.Edit(CurrentReservation, reservationSearchedId);
 
@@ -248,25 +149,12 @@ namespace Booking_Test.ViewModel
 
         private void ExecuteClearInputsCommand(object obj)
         {
-            Firstname = "";
-            Lastname = "";
-            Number = 0;
-            Phone = "";
-            Email = "";
-            Address = "";
-            RoomNumber = 0;
+            Reservation = new ReservationModel();
         }
 
         private void ExecuteAddReservationCommand(object obj)
         {
-            CurrentReservation.ReservationId = Guid.NewGuid();
-            CurrentReservation.Firstname = Firstname;
-            CurrentReservation.Lastname = Lastname;
-            CurrentReservation.Number = Number;
-            CurrentReservation.Phone = Phone;
-            CurrentReservation.Email = Email;
-            CurrentReservation.Address = Address;
-            CurrentReservation.RoomNumber = RoomNumber;
+            CurrentReservation = Reservation;
 
             reservationRepository.Add(CurrentReservation);
 

@@ -21,9 +21,9 @@ namespace Booking_Test.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "insert into [Reservation] values (@reservationID, @firstname, @lastname,@number,@phone,@email,@address,@roomnumber)";
-                command.Parameters.Add("@reservationID", SqlDbType.UniqueIdentifier).Value = reservation.ReservationId;
-                command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = reservation.Firstname;
+                command.CommandText = "insert into [Reservation] values (@ID, @customer_id, @room_id,@number,@phone,@email,@address,@roomnumber)";
+                command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = reservation.Id;
+                command.Parameters.Add("@customer_id", SqlDbType.Int).Value = reservation.customer_id;
                 command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = reservation.Lastname;
                 command.Parameters.Add("@number", SqlDbType.Int).Value = reservation.Number;
                 command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = reservation.Phone;
@@ -195,6 +195,11 @@ namespace Booking_Test.Repositories
 
             }
 
+        }
+
+        public ObservableCollection<ReservationModel> GetByCustomerId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

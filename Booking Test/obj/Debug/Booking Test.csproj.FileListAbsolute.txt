@@ -102,3 +102,5 @@ E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.g.
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\UsersView.baml
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationView.g.cs
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CreditCardView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CreditCardView.baml

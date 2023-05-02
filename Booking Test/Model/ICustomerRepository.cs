@@ -12,9 +12,8 @@ namespace Booking_Test.Model
         void Add(CustomerModel customerModel);
         void Edit(CustomerModel customerModel);
         void Remove(int id);
-        CustomerModel GetByCustomerName(string name);
-        ObservableCollection<CustomerModel> GetByCustomerId(int id);
-        ObservableCollection<CustomerModel> GetAll();
-        ObservableCollection<CustomerModel> Clear();
+        ObservableCollection<CustomerModel> GetByCustomerName(string name);
+        CustomerModel GetByCustomerId(int id);
+        IEnumerable<CustomerModel> GetAll(ObservableCollection<CustomerModel> customers);
     }
 }

@@ -63,7 +63,8 @@ namespace Booking_Test.ViewModel
 
         //--> Commands
         public ICommand ShowHomeViewCommand {get;}
-        public ICommand ShowCustomerViewCommand { get; }
+        public ICommand ShowReservationViewCommand { get; }
+        public ICommand ShowCustomersViewCommand { get; }
         public ICommand ShowUsersViewCommand { get; }
 
         public MainViewModel()
@@ -73,7 +74,8 @@ namespace Booking_Test.ViewModel
 
             //Initialize commands
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
-            ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+            ShowReservationViewCommand = new ViewModelCommand(ExecuteShowReservationViewCommand);
+            ShowCustomersViewCommand = new ViewModelCommand(ExecuteShowCustomersViewCommand);
             ShowUsersViewCommand = new ViewModelCommand(ExecuteShowUsersViewCommand);
 
             //Default view
@@ -82,18 +84,25 @@ namespace Booking_Test.ViewModel
             LoadCurrentUserData();
         }
 
+        private void ExecuteShowReservationViewCommand(object obj)
+        {
+            CurrentChildView = new ReservationViewModel();
+            Caption = "Reservation";
+            Icon = IconChar.PhoneVolume;
+        }
+
         private void ExecuteShowUsersViewCommand(object obj)
         {
             CurrentChildView = new UsersViewModel();
             Caption = "Users";
-            Icon = IconChar.UserGroup;
+            Icon = IconChar.User;
         }
 
-        private void ExecuteShowCustomerViewCommand(object obj)
+        private void ExecuteShowCustomersViewCommand(object obj)
         {
             CurrentChildView = new CustomerViewModel();
-            Caption = "Reservation";
-            Icon = IconChar.PhoneVolume;
+            Caption = "Customers";
+            Icon = IconChar.UserGroup;
         }
 
         private void ExecuteShowHomeViewCommand(object obj)

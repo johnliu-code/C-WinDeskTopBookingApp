@@ -23,6 +23,10 @@
             <local:HomeView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:ReservationViewModel}">
+            <local:ReservationView />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewModel:CustomerViewModel}">
             <local:CustomerView />
         </DataTemplate>
@@ -90,7 +94,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color2}"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Command="{Binding ShowReservationViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="PhoneVolume" Style="{StaticResource menuButtonIcon}" />
@@ -283,7 +287,20 @@
 
                                 </MenuItem>
 
-                                <!--Users-->
+                                <!--Customers-->
+
+                                <MenuItem Header="Customers" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Command="{Binding ShowCustomersViewCommand}">
+
+                                </MenuItem>
+
+
+                                <!--Reservations-->
+
+                                <MenuItem Header="Reservations" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Command="{Binding ShowReservationsViewCommand}">
+
+                                </MenuItem>
+
+                                <!--Functions-->
 
                                 <MenuItem Header="Functions" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}">
 

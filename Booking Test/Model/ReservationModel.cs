@@ -18,6 +18,9 @@ namespace Booking_Test.Model
         public DateTime Checkout_date { get; set; }
         public string Vehicle { get; set; }
         public string Agency { get; set; }
+        public string Title { get; set; }
+        public string Animals { get; set; }
+        public string Time { get; set; }
 
     }
 }

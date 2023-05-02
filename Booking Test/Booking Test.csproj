@@ -79,21 +79,39 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CreditCardModel.cs" />
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Model\ICreditCardRepository.cs" />
+    <Compile Include="Model\ICustomerRepository.cs" />
     <Compile Include="Model\IReservationRepository.cs" />
     <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Model\PeriodModel.cs" />
+    <Compile Include="Model\RateAdjustmentModel.cs" />
+    <Compile Include="Model\RateModel.cs" />
     <Compile Include="Model\ReservationModel.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\SeasonModel.cs" />
+    <Compile Include="Model\SpendModel.cs" />
+    <Compile Include="Model\TaxModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\CreditCardRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ReservationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModel\CreditCardViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ReservationViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="View\CreditCardView.xaml.cs">
+      <DependentUpon>CreditCardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\UIColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreditCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,10 +10,9 @@ namespace Booking_Test.Model
     public interface IReservationRepository
     {
         void Add(ReservationModel reservationModel);
-        void Edit(ReservationModel reservationModel, Guid reservationid);
+        void Edit(ReservationModel reservationModel);
         void Remove(Guid reservationid);
-        ReservationModel GetByReservationId(Guid reservationid);
-        //ReservationModel GetByReservationUsername(string firstname, string lastname);
+        ReservationModel GetByCheckinDate(DateTime checkindate);
         ObservableCollection<ReservationModel> GetByCustomerId(int id);
         ObservableCollection<ReservationModel> GetAll();
         ObservableCollection<ReservationModel> Clear();

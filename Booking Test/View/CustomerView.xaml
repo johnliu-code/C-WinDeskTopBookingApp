@@ -23,7 +23,7 @@
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top"
                         Grid.Column="0">
-                <!--   <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
+                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
                 <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"   
                     FontSize="13"
                          Height="24"
@@ -38,12 +38,12 @@
                              VerticalContentAlignment="Center"
                              Margin="5,5,0,0" 
                               >
-                </TextBox>  -->
+                </TextBox>
 
             </StackPanel>
             <Button Grid.Column="1"
-                            Command="{Binding ShowAllReservationCommand}"                            
-                            Content="Search All Reservations"                            
+                            Command="{Binding ShowAllCustomerCommand}"                            
+                            Content="Search Customer"                            
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"
@@ -62,10 +62,10 @@
                 ColumnWidth="*"
                   Background="#200F53"
                   BorderThickness="0"
-                  ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
-                      AutoGenerateColumns="False"
-                      SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-                      >
+                  ItemsSource="{Binding Customers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                  >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -75,20 +75,25 @@
                         <Setter Property="FontSize" Value="15"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ReservationId}" Header="Reservation ID" />
-                    <DataGridTextColumn Binding="{Binding Firstname}" Header="First name"/>
-                    <DataGridTextColumn Binding="{Binding Lastname}"  Header="Last name"/>
-                    <DataGridTextColumn Binding="{Binding Number}"  Header="Number"/>
-                    <DataGridTextColumn Binding="{Binding Phone}"  Header="Phone"/>
-                    <DataGridTextColumn Binding="{Binding Email}"  Header="Email"/>
-                    <DataGridTextColumn Binding="{Binding Address}"  Header="Address"/>
-                    <DataGridTextColumn Binding="{Binding RoomNumber}"  Header="RoomNumber"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="50" CanUserResize="False" FontSize="16" />
+                    <DataGridTextColumn Binding="{Binding First_name}" Header="First name"/>
+                    <DataGridTextColumn Binding="{Binding Last_name}"  Header="Last name"/>
+                    <DataGridTextColumn Binding="{Binding Title}"  Header="Title"/>
+                    <DataGridTextColumn Binding="{Binding Phone}"  Header="Phone" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Email}"  Header="Email" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Street}"  Header="Street" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding City}"  Header="City"/>
+                    <DataGridTextColumn Binding="{Binding State}"  Header="State"/>
+                    <DataGridTextColumn Binding="{Binding Country}"  Header="Country"/>
+                    <DataGridTextColumn Binding="{Binding Postal_code}"  Header="Post"/>
                 </DataGrid.Columns>
+                
             </DataGrid>
 
         </Border>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0, 20, 0, 0">
 
             <Grid.RowDefinitions>
                 <RowDefinition  Height="*"/>
@@ -111,13 +116,13 @@
             <TextBlock  Grid.Row="0" Grid.Column="0"  x:Name="textBlockLastName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
                          Text="Last Name :" VerticalAlignment="Center" Width="66" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"  />
             <TextBlock  Grid.Row="1" Grid.Column="0" x:Name="textBlockAddress" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Address :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock  Grid.Row="2" Grid.Column="0" x:Name="textBlockNumber" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Number :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                         Text="Phone :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock  Grid.Row="2" Grid.Column="0" x:Name="textBlockTitle" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Title :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
             <TextBlock  Grid.Row="3" Grid.Column="0" x:Name="textBlockRoomNumber" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Room Number :"  VerticalAlignment="Center" Width="86" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                         Text="City :"  VerticalAlignment="Center" Width="86" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
             <TextBlock  Grid.Row="4" Grid.Column="0" x:Name="textBlockNotes" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Notes :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                         Text="Country :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
 
             <!-- -->
             <TextBlock Grid.Row="0" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockFirstName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
@@ -125,24 +130,30 @@
             <TextBlock Grid.Row="1" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
                              Text="Email :" VerticalAlignment="Center" Width="54" Foreground="#BCBEE0" FontFamily="Montserrat"/>
             <TextBlock Grid.Row="2" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPhone" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Phone :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+                         Text="Address :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockState" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="State :" VerticalAlignment="Center" Width="54" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPost" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Post Code :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"  />
-            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxRoomNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" x:Name="textBoxNotes" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" VerticalScrollBarVisibility="Visible" Width="590" Height="50" />
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Last_name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxPhone" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Phone, UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Title, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxCity" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.City, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="4" Grid.Column="1" x:Name="textBoxCountry" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Country, UpdateSourceTrigger=PropertyChanged}" />
             <!-- -->
-            <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBoxFirstName" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23"  Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="1" Grid.Column="3" x:Name="textBoxEmail" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="2" Grid.Column="3" x:Name="textBoxPhone" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBoxFirstName" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23"  Text="{Binding Customer.First_name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="1" Grid.Column="3" x:Name="textBoxEmail" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Email, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="2" Grid.Column="3" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Customer.Street, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="3" Grid.Column="3" x:Name="textBoxState" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.State, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="4" Grid.Column="3" x:Name="textBoxPost" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Customer.Postal_code, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Grid.Row="0" Grid.Column="4" x:Name="btnSearch" Content="Search" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding ShowReservationCommand}" Style="{StaticResource reservationButton}"/>
-            <Button Grid.Row="1" Grid.Column="4" x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center"  Width="100" Height="30"  Command="{Binding AddReservationCommand}" Style="{StaticResource reservationButton}" />
-            <Button Grid.Row="2" Grid.Column="4" x:Name="btnModify" Content="Modify" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30"   Command="{Binding ModifyReservationCommand}" Style="{StaticResource reservationButton}"/>
-            <Button Grid.Row="3" Grid.Column="4" x:Name="btnDelete" Content="Delete" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding DeleteReservationCommand}" Style="{StaticResource reservationButton}"/>
-            <Button Grid.Row="4" Grid.Column="4" x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding ClearInputsCommand}" Style="{StaticResource reservationButton}" />
-            <Button Grid.Row="5" Grid.Column="4" x:Name="btnQuit" Content="Quit" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding QuitReservationCommand}" Style="{StaticResource reservationButton}"/>
+
+            <Button Grid.Row="0" Grid.Column="4" x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center"  Width="100" Height="30"  Command="{Binding AddCustomerCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="1" Grid.Column="4" x:Name="btnModify" Content="Modify" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30"   Command="{Binding ModifyCustomerCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="2" Grid.Column="4" x:Name="btnDelete" Content="Delete" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding DeleteCustomerCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="3" Grid.Column="4" x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding ClearInputsCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="4" Grid.Column="4" x:Name="btnSearch" Content="Credit Card" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding OpenCreditCardWindowCommand}" Style="{StaticResource reservationButton}"/>
         </Grid>
 
     </Grid>

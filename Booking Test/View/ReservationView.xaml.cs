@@ -24,7 +24,7 @@ namespace Booking_Test.View
         public ReservationView()
         {
             InitializeComponent();
-            DataContext = new CustomerViewModel();
+            DataContext = new ReservationViewModel();
         }
     }
 }

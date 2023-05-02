@@ -19,6 +19,5 @@ namespace Booking_Test.Model
         public string State { get; set; }
         public string Country { get; set; }
         public string Postal_code { get; set; }
-        public int CreditCardId { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace Booking_Test.ViewModel
         private string search_username;
         private IUserRepository userRepository;
 
+
         // Properties
         public UserModel User
         {

@@ -10,10 +10,10 @@ namespace Booking_Test.Model
     public interface ICreditCardRepository
     {
         void Add(CreditCardModel creditCardModel);
-        void Edit(CreditCardModel creditCardModel, int id);
+        void Edit(CreditCardModel creditCardModel);
         void Remove(int id);
         CreditCardModel GetByCreditCardId(int id);
         ObservableCollection<CreditCardModel> GetByCustomerId(int id);
-
+        ObservableCollection<CreditCardModel> GetAll(ObservableCollection<CreditCardModel> creditCards);
     }
 }

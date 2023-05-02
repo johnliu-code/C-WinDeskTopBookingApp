@@ -9,7 +9,7 @@ namespace Booking_Test.Model
     public class CreditCardModel
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public int Customer_Id { get; set; }
         public string Holder_name { get; set; }
         public string Card_number { get; set; }
         public DateTime Expire_date { get; set;}

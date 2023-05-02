@@ -8,7 +8,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModel:CustomerViewModel}">
+             d:DataContext="{d:DesignInstance viewModel:ReservationViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -64,8 +64,7 @@
                   BorderThickness="0"
                   ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
                       AutoGenerateColumns="False"
-                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-                     
+                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}"                    
                       >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -77,14 +76,17 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ReservationId}" Header="Reservation ID" />
-                    <DataGridTextColumn Binding="{Binding Firstname}" Header="First name"/>
-                    <DataGridTextColumn Binding="{Binding Lastname}"  Header="Last name"/>
-                    <DataGridTextColumn Binding="{Binding Number}"  Header="Number"/>
-                    <DataGridTextColumn Binding="{Binding Phone}"  Header="Phone"/>
-                    <DataGridTextColumn Binding="{Binding Email}"  Header="Email"/>
-                    <DataGridTextColumn Binding="{Binding Address}"  Header="Address"/>
-                    <DataGridTextColumn Binding="{Binding RoomNumber}"  Header="RoomNumber"/>
+                    <DataGridTextColumn Binding="{Binding Occupant}" Header="Occupant" />
+                    <DataGridTextColumn Binding="{Binding Title}" Header="Mr. / Ms." />
+                    <DataGridTextColumn Binding="{Binding Room_id}"  Header="Room Number"/>
+                    <DataGridTextColumn Binding="{Binding Checkin_date}"  Header="CheckIn"/>
+                    <DataGridTextColumn Binding="{Binding Checkout_date}"  Header="CheckOut"/>
+                    <DataGridTextColumn Binding="{Binding Time}"  Header="Time"/>
+                    <DataGridTextColumn Binding="{Binding Num_adults}"  Header="Adults"/>
+                    <DataGridTextColumn Binding="{Binding Num_children}"  Header="Children"/>
+                    <DataGridTextColumn Binding="{Binding Animals}"  Header="Animals"/>
+                    <DataGridTextColumn Header="Packages"/>
+                    <DataGridTextColumn Binding="{Binding Price}"  Header="Price"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -128,8 +130,8 @@
             <TextBlock Grid.Row="2" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPhone" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
                          Text="Phone :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentCustomer.First_name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentCustomer.Last_name, UpdateSourceTrigger=PropertyChanged}"  />
             <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxRoomNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" x:Name="textBoxNotes" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" VerticalScrollBarVisibility="Visible" Width="590" Height="50" />

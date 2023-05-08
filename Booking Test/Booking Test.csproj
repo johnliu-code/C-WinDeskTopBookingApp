@@ -79,11 +79,15 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Model\ICustomerRepository.cs" />
     <Compile Include="Model\IReservationRepository.cs" />
     <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Model\ReservationDetailsModel.cs" />
     <Compile Include="Model\ReservationModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ReservationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

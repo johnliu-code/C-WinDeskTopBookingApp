@@ -31,14 +31,18 @@ namespace Booking_Test.ViewModel
         public string _firstname;
         public string _lastname;
         public int _number;
+        public int _customerId;
         public string _phone;
         public string _email;
         public string _address;
         public int _roomNumber;
         private ReservationModel _currentReservation;
         private ReservationModel _selectedItem;
+        private ReservationDetailsModel _currentReservationDetails;
+        private ReservationDetailsModel _reservationDetail;
 
         private IReservationRepository reservationRepository;
+        private ICustomerRepository customerRepository;
         private ViewModelBase _currentView;
 
         // Properties
@@ -64,11 +68,12 @@ namespace Booking_Test.ViewModel
                     OnPropertyChanged(nameof(SelectedItem));
                     if (SelectedItem != null)
                     {
-                        Firstname = _selectedItem.Firstname;
-                        Lastname = _selectedItem.Lastname;
-                        Phone = _selectedItem.Phone;
-                        Email = _selectedItem.Email;
-                        Address = _selectedItem.Address;
+                        //Firstname = _selectedItem.Firstname;
+                        //Lastname = _selectedItem.Lastname;
+                        //Phone = _selectedItem.Phone;
+                        //Email = _selectedItem.Email;
+                        //Address = _selectedItem.Address;
+                        CustomerId = _selectedItem.CustomerId;
                         RoomNumber = _selectedItem.RoomNumber;
                         Number = _selectedItem.Number;
                     }
@@ -77,6 +82,25 @@ namespace Booking_Test.ViewModel
         }
 
 
+        public ReservationDetailsModel CurrentReservationDetails
+        {
+            get => _currentReservationDetails;
+            set
+            {
+                _currentReservationDetails = value;
+                OnPropertyChanged(nameof(CurrentReservationDetails));
+            }
+        }
+
+        public ReservationDetailsModel ReservationDetail
+        {
+            get => _reservationDetail;
+            set
+            {
+                _reservationDetail = value;
+                OnPropertyChanged(nameof(ReservationDetail));
+            }
+        }
 
         public ReservationModel CurrentReservation
         {
@@ -89,6 +113,16 @@ namespace Booking_Test.ViewModel
         }
 
         public int ReservationId
+        {
+            get => _reservationId;
+            set
+            {
+                _reservationId = value;
+                OnPropertyChanged(nameof(ReservationId));
+            }
+        }
+
+        public int CustomerId
         {
             get => _reservationId;
             set
@@ -170,6 +204,7 @@ namespace Booking_Test.ViewModel
 
         public ObservableCollection<ReservationModel> Reservations { get; set; }
         public ObservableCollection<ReservationModel> ReservationsAll { get; set; }
+        public ObservableCollection<ReservationDetailsModel> ReservationsDetails { get; set; }
 
         // -> Commands
         public ICommand LoginCommand { get; }
@@ -188,11 +223,14 @@ namespace Booking_Test.ViewModel
         public CustomerViewModel()
         {
             reservationRepository = new ReservationRepository();
+            customerRepository = new CustomerRepository();
             CurrentReservation = new ReservationModel();
             ShowReservationCommand = new ViewModelCommand(ExecuteShowReservationCommand);
             ShowAllReservationCommand = new ViewModelCommand(ExecuteShowAllReservationCommand);
             Reservations = new ObservableCollection<ReservationModel>();
             ReservationsAll = new ObservableCollection<ReservationModel>();
+            ReservationsDetails = new ObservableCollection<ReservationDetailsModel>();
+          
             AddReservationCommand = new ViewModelCommand(ExecuteAddReservationCommand);
             ClearInputsCommand = new ViewModelCommand(ExecuteClearInputsCommand);
             QuitReservationCommand = new ViewModelCommand(ExecuteQuitReservationCommand);
@@ -218,12 +256,13 @@ namespace Booking_Test.ViewModel
             if (SelectedItem != null)
             {
                 var reservationSearchedId = SelectedItem.ReservationId;
-                CurrentReservation.Firstname = Firstname;
-                CurrentReservation.Lastname = Lastname;
+                //CurrentReservation.Firstname = Firstname;
+                //CurrentReservation.Lastname = Lastname;
+                CurrentReservation.CustomerId = CustomerId;
                 CurrentReservation.Number = Number;
-                CurrentReservation.Phone = Phone;
-                CurrentReservation.Email = Email;
-                CurrentReservation.Address = Address;
+                //CurrentReservation.Phone = Phone;
+                //CurrentReservation.Email = Email;
+                //CurrentReservation.Address = Address;
                 CurrentReservation.RoomNumber = RoomNumber;
 
                 reservationRepository.Edit(CurrentReservation, reservationSearchedId);
@@ -269,12 +308,13 @@ namespace Booking_Test.ViewModel
         private void ExecuteAddReservationCommand(object obj)
         {
             CurrentReservation.ReservationId = Guid.NewGuid();
-            CurrentReservation.Firstname = Firstname;
-            CurrentReservation.Lastname = Lastname;
+            //CurrentReservation.Firstname = Firstname;
+            //CurrentReservation.Lastname = Lastname;
+            CurrentReservation.CustomerId = Number;
             CurrentReservation.Number = Number;
-            CurrentReservation.Phone = Phone;
-            CurrentReservation.Email= Email;
-            CurrentReservation.Address= Address;
+            //CurrentReservation.Phone = Phone;
+            //CurrentReservation.Email= Email;
+            //CurrentReservation.Address= Address;
             CurrentReservation.RoomNumber= RoomNumber;
 
             reservationRepository.Add(CurrentReservation);
@@ -285,7 +325,7 @@ namespace Booking_Test.ViewModel
         private void ExecuteShowAllReservationCommand(object obj)
         {
             //ReservationsAll.Clear();
-            Reservations.Clear();
+            ReservationsDetails.Clear();
             //var reservationsAll = reservationRepository.GetAll();
             //if (reservationsAll.Count > 0)
             var reservations = reservationRepository.GetAll();
@@ -295,17 +335,39 @@ namespace Booking_Test.ViewModel
                 {
                     
                     Console.WriteLine($"Reservation ID: {reservation.ReservationId}");
-                    Console.WriteLine($"First Name: {reservation.Firstname}");
-                    Console.WriteLine($"Last Name: {reservation.Lastname}");
+                    Console.WriteLine($"Customer ID: {reservation.CustomerId}");
+                    //Console.WriteLine($"First Name: {reservation.Firstname}");
+                    //Console.WriteLine($"Last Name: {reservation.Lastname}");
                     Console.WriteLine($"Number of guests: {reservation.Number}");
-                    Console.WriteLine($"Phone number: {reservation.Phone}");
-                    Console.WriteLine($"Email: {reservation.Email}");
-                    Console.WriteLine($"Address: {reservation.Address}");
+                    //Console.WriteLine($"Phone number: {reservation.Phone}");
+                    //Console.WriteLine($"Email: {reservation.Email}");
+                    //Console.WriteLine($"Address: {reservation.Address}");
                     Console.WriteLine($"Room Number: {reservation.RoomNumber}");
                     Console.WriteLine("------------");
-                    CurrentReservation = reservation;
-                    //ReservationsAll.Add(reservation);
-                    Reservations.Add(reservation);
+                   
+                        var customer = customerRepository.GetByCustomerId(reservation.CustomerId);
+
+                        var ReservationDetail = new ReservationDetailsModel();
+                        //ReservationsAll.Add(reservation);
+
+                        ReservationDetail.ReservationId = reservation.ReservationId;
+                        ReservationDetail.CustomerId = reservation.CustomerId;
+                        ReservationDetail.Number = reservation.Number;
+                        ReservationDetail.RoomNumber = reservation.RoomNumber;
+                        ReservationDetail.Firstname = customer.Firstname;
+                        ReservationDetail.Lastname = customer.Lastname;
+                        ReservationDetail.Address = customer.Address;
+                        ReservationDetail.Phone = customer.Phone;
+                        ReservationDetail.Email = customer.Email;
+
+                        Console.WriteLine(ReservationDetail.ReservationId);
+                        Console.WriteLine(ReservationDetail.Firstname);
+                        Console.WriteLine(ReservationDetail.Lastname);
+                        Console.WriteLine(ReservationDetail.Address);
+
+
+                   
+                    ReservationsDetails.Add(ReservationDetail);
 
                 }
             }
@@ -318,36 +380,72 @@ namespace Booking_Test.ViewModel
 
         private void ExecuteShowReservationCommand(object obj)
         {
-            Reservations.Clear();
+            ReservationsDetails.Clear();
             if (Firstname == null && Lastname == null)
             {
                MessageBox.Show("First Name and Last Name can't be empty at the same time!");
             }
             else
             {
-                var reservations = reservationRepository.GetByReservationUsername(Firstname);
-                if (reservations.Count > 0)
+                var customers = customerRepository.GetByCustomerUsername(Firstname);
+                Console.WriteLine($"customers.Count: {customers.Count}");
+                if (customers.Count > 0)
                 {
-                    foreach (var reservation in reservations)
+                    foreach (var customer in customers)
                     {
-                        var existingReservation = Reservations.FirstOrDefault(r => r.ReservationId == reservation.ReservationId);
-                        if (existingReservation == null)
+                        Console.WriteLine($"yyyyy: {customer.CustomerId}");
+                        var reservations = reservationRepository.GetByCustomerId(customer.CustomerId);
+                        
+
+                        if (reservations.Count > 0)
                         {
-                            // Reservation does not exist in the collection, add it
-                            Reservations.Add(reservation);
-                            CurrentReservation = reservation;
+                            foreach (var reservation in reservations)
+                            {
+                                var existingReservation = Reservations.FirstOrDefault(r => r.ReservationId == reservation.ReservationId);
+                                if (existingReservation == null)
+                                {
+                                    // Reservation does not exist in the collection, add it
+                                    //Reservations.Add(reservation);
+                                    //CurrentReservation = reservation;
+
+                                    var ReservationDetail = new ReservationDetailsModel();
+                                 
+
+                                    ReservationDetail.ReservationId = reservation.ReservationId;
+                                    ReservationDetail.CustomerId = reservation.CustomerId;
+                                    ReservationDetail.Number = reservation.Number;
+                                    ReservationDetail.RoomNumber = reservation.RoomNumber;
+                                    ReservationDetail.Firstname = customer.Firstname;
+                                    ReservationDetail.Lastname = customer.Lastname;
+                                    ReservationDetail.Address = customer.Address;
+                                    ReservationDetail.Phone = customer.Phone;
+                                    ReservationDetail.Email = customer.Email;
+
+                                    Console.WriteLine(ReservationDetail.ReservationId);
+                                    Console.WriteLine(ReservationDetail.Firstname);
+                                    Console.WriteLine(ReservationDetail.Lastname);
+                                    Console.WriteLine(ReservationDetail.Address);
+
+
+
+                                    ReservationsDetails.Add(ReservationDetail);
+
+
+
+                                }
+                                else
+                                {
+                                    // Reservation already exists in the collection, set it as the current reservation
+                                    CurrentReservation = existingReservation;
+                                }
+                            }
                         }
                         else
                         {
-                            // Reservation already exists in the collection, set it as the current reservation
-                            CurrentReservation = existingReservation;
+                            // Display a message or clear the CurrentReservation property
+                            CurrentReservation = null;
                         }
                     }
-                }
-                else
-                {
-                    // Display a message or clear the CurrentReservation property
-                    CurrentReservation = null;
                 }
             }
         }

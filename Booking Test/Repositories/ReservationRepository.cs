@@ -21,14 +21,16 @@ namespace Booking_Test.Repositories
             {
                 connection.Open(); 
                 command.Connection = connection;
-                command.CommandText = "insert into [Reservation] values (@reservationID, @firstname, @lastname,@number,@phone,@email,@address,@roomnumber)";
+                //command.CommandText = "insert into [Reservation] values (@reservationID, @fistname,@lastname,@number,@phone,@email,@address,@roomnumber)";
+                command.CommandText = "insert into [Reservation] values (@reservationID, @customerID,@number,@roomnumber)";
                 command.Parameters.Add("@reservationID", SqlDbType.UniqueIdentifier).Value = reservation.ReservationId;
-                command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = reservation.Firstname;
-                command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = reservation.Lastname;
+                //command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = reservation.Firstname;
+                //command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = reservation.Lastname;
+                command.Parameters.Add("@customerID", SqlDbType.Int).Value = reservation.CustomerId;
                 command.Parameters.Add("@number", SqlDbType.Int).Value = reservation.Number;
-                command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = reservation.Phone;
-                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = reservation.Email;                
-                command.Parameters.Add("@address", SqlDbType.NVarChar).Value = reservation.Address;
+                //command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = reservation.Phone;
+                //command.Parameters.Add("@email", SqlDbType.NVarChar).Value = reservation.Email;                
+                //command.Parameters.Add("@address", SqlDbType.NVarChar).Value = reservation.Address;
                 command.Parameters.Add("@roomnumber", SqlDbType.Int).Value = reservation.RoomNumber;
                 command.ExecuteNonQuery();
 
@@ -62,15 +64,16 @@ namespace Booking_Test.Repositories
                 connection.Open();
                 command.Connection = connection;
                
-                command.CommandText = "UPDATE [Reservation] SET Firstname = @firstname, Lastname = @lastname, Number = @number, Phone = @phone, Email = @email, Address = @address, RoomNumber = @roomnumber WHERE ReservationID = @reservationID";
-
+                //command.CommandText = "UPDATE [Reservation] SET Firstname = @firstname, Lastname = @lastname, Number = @number, Phone = @phone, Email = @email, Address = @address, RoomNumber = @roomnumber WHERE ReservationID = @reservationID";
+                command.CommandText = "UPDATE [Reservation] SET CustomerId = @customerID, Number = @number,RoomNumber = @roomnumber WHERE ReservationID = @reservationID";
                 command.Parameters.Add("@reservationID", SqlDbType.UniqueIdentifier).Value = reservationid;
-                command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = reservation.Firstname;
-                command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = reservation.Lastname;
+                //command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = reservation.Firstname;
+                //command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = reservation.Lastname;
+                command.Parameters.Add("@customerID", SqlDbType.Int).Value = reservation.CustomerId;
                 command.Parameters.Add("@number", SqlDbType.Int).Value = reservation.Number;
-                command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = reservation.Phone;
-                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = reservation.Email;
-                command.Parameters.Add("@address", SqlDbType.NVarChar).Value = reservation.Address;
+                //command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = reservation.Phone;
+                //command.Parameters.Add("@email", SqlDbType.NVarChar).Value = reservation.Email;
+                //command.Parameters.Add("@address", SqlDbType.NVarChar).Value = reservation.Address;
                 command.Parameters.Add("@roomnumber", SqlDbType.Int).Value = reservation.RoomNumber;
                 command.ExecuteNonQuery();
 
@@ -103,13 +106,14 @@ namespace Booking_Test.Repositories
                         var reservation = new ReservationModel()
                         {
                             ReservationId = (Guid)reader[0],
-                            Firstname = reader[1].ToString(),
-                            Lastname = reader[2].ToString(),
-                            Number = reader[3].GetHashCode(),
-                            Phone = reader[4].ToString(),
-                            Email = reader[5].ToString(),
-                            Address = reader[6].ToString(),
-                            RoomNumber = reader[7].GetHashCode()
+                            //Firstname = reader[1].ToString(),
+                            //Lastname = reader[2].ToString(),
+                            CustomerId = reader[1].GetHashCode(),
+                            Number = reader[2].GetHashCode(),
+                            //Phone = reader[4].ToString(),
+                            //Email = reader[5].ToString(),
+                            //Address = reader[6].ToString(),
+                            RoomNumber = reader[3].GetHashCode()
                         };
                         reservations.Add(reservation);
                     }
@@ -133,12 +137,12 @@ namespace Booking_Test.Repositories
                     while (reader.Read())
                     {
                         reservation.ReservationId = (Guid)reader[0];
-                        reservation.Firstname = reader[1].ToString();
-                        reservation.Lastname = reader[2].ToString();
+                        //reservation.Firstname = reader[1].ToString();
+                        //reservation.Lastname = reader[2].ToString();
                         reservation.Number = reader[3].GetHashCode();
-                        reservation.Phone = reader[4].ToString();
-                        reservation.Email = reader[5].ToString();
-                        reservation.Address = reader[6].ToString();
+                        //reservation.Phone = reader[4].ToString();
+                        //reservation.Email = reader[5].ToString();
+                        //reservation.Address = reader[6].ToString();
                         reservation.RoomNumber = reader[7].GetHashCode();
                        
                     }
@@ -147,18 +151,17 @@ namespace Booking_Test.Repositories
             return reservation;
         }
 
-        //public ReservationModel GetByReservationUsername(string firstname,string lastname)
-        public ObservableCollection<ReservationModel> GetByReservationUsername(string firstname)
+        public ObservableCollection<ReservationModel> GetByCustomerId(int customerId)
         {
-                  
+
             var reservations = new ObservableCollection<ReservationModel>();
             using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "Select * from [Reservation] where firstname = @firstname";
-                command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = firstname;
+                command.CommandText = "Select * from [Reservation] where customer_id = @customerId";
+                command.Parameters.Add("@customerId", SqlDbType.NVarChar).Value = customerId;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -166,13 +169,14 @@ namespace Booking_Test.Repositories
                         var reservation = new ReservationModel()
                         {
                             ReservationId = (Guid)reader[0],
-                            Firstname = reader[1].ToString(),
-                            Lastname = reader[2].ToString(),
-                            Number = reader[3].GetHashCode(),
-                            Phone = reader[4].ToString(),
-                            Email = reader[5].ToString(),
-                            Address = reader[6].ToString(),
-                            RoomNumber = reader[7].GetHashCode()
+                            //Firstname = reader[1].ToString(),
+                            //Lastname = reader[2].ToString(),
+                            CustomerId= reader[1].GetHashCode(),
+                            Number = reader[2].GetHashCode(),
+                            //Phone = reader[4].ToString(),
+                            //Email = reader[5].ToString(),
+                            //Address = reader[6].ToString(),
+                            RoomNumber = reader[3].GetHashCode()
                         };
                         reservations.Add(reservation);
                     }
@@ -180,6 +184,38 @@ namespace Booking_Test.Repositories
             }
             return reservations;
         }
+        //public ObservableCollection<ReservationModel> GetByReservationUsername(string firstname)
+        //{
+                  
+        //    var reservations = new ObservableCollection<ReservationModel>();
+        //    using (var connection = GetConnection())
+        //    using (var command = new SqlCommand())
+        //    {
+        //        connection.Open();
+        //        command.Connection = connection;
+        //        command.CommandText = "Select * from [Reservation] where firstname = @firstname";
+        //        command.Parameters.Add("@firstname", SqlDbType.NVarChar).Value = firstname;
+        //        using (var reader = command.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                var reservation = new ReservationModel()
+        //                {
+        //                    ReservationId = (Guid)reader[0],
+        //                    //Firstname = reader[1].ToString(),
+        //                    //Lastname = reader[2].ToString(),
+        //                    Number = reader[3].GetHashCode(),
+        //                    //Phone = reader[4].ToString(),
+        //                    //Email = reader[5].ToString(),
+        //                    //Address = reader[6].ToString(),
+        //                    RoomNumber = reader[7].GetHashCode()
+        //                };
+        //                reservations.Add(reservation);
+        //            }
+        //        }
+        //    }
+        //    return reservations;
+        //}
 
         public void Remove(Guid reservationid)
         {

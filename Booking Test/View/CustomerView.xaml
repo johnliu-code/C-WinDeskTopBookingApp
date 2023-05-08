@@ -64,7 +64,7 @@
                 ColumnWidth="*"
                   Background="#200F53"
                   BorderThickness="0"
-                  ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
+                  ItemsSource="{Binding  ReservationsDetails,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
                       AutoGenerateColumns="False"
                      SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
                      

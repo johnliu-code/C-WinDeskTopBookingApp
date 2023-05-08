@@ -8,7 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("motelbookingmsdb.mdf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("motelbookingmsdb_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/creditcard.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/customer.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/invoice.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/period.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/rate.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/rateadjustment.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/reservation.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/room.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/season.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/spend.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("document_reference/db/tax.sql")]
 
 

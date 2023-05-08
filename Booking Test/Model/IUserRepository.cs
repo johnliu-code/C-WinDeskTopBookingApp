@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -12,9 +14,9 @@ namespace Booking_Test.Model
         bool AuthenticateUser(NetworkCredential credential);
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
-        void Remove(int id);
-        UserModel GetById(int id);
+        void Remove(Guid id);
+        UserModel GetById(Guid id);
         UserModel GetByUsername(string username);
-        IEnumerable<UserModel> GetAll();
+        IEnumerable<UserModel> GetAll(ObservableCollection<UserModel> users);
     }
 }

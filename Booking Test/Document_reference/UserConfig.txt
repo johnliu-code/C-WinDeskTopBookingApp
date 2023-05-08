@@ -1,0 +1,4 @@
+﻿Username      Password          Roll              Permission
+admin         admin@2023        admin              A
+manager       bonsoir@2023      manager            M
+reception     bonsoir@2023      reception          B

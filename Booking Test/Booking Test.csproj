@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Booking_Test</RootNamespace>
     <AssemblyName>Booking Test</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -29,6 +29,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +55,8 @@
       <HintPath>..\packages\FontAwesome.Sharp.6.1.1\lib\net48\FontAwesome.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -77,22 +80,53 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Availability.cs" />
+    <Compile Include="Model\CreditCardModel.cs" />
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Model\ICreditCardRepository.cs" />
+    <Compile Include="Model\ICustomerRepository.cs" />
+    <Compile Include="Model\IReservationRepository.cs" />
     <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Model\PeriodModel.cs" />
+    <Compile Include="Model\RateAdjustmentModel.cs" />
+    <Compile Include="Model\RateModel.cs" />
+    <Compile Include="Model\ReservationDataModel.cs" />
+    <Compile Include="Model\ReservationModel.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\RoomNumber.cs" />
+    <Compile Include="Model\SeasonModel.cs" />
+    <Compile Include="Model\SpendModel.cs" />
+    <Compile Include="Model\TaxModel.cs" />
     <Compile Include="Model\UserAccountModel.cs" />
     <Compile Include="Model\UserModel.cs" />
-    <Compile Include="MotelBookingMSDbDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MotelBookingMSDbDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Repositories\CreditCardRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\ReservationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModel\AllReservationsListViewModel.cs" />
+    <Compile Include="ViewModel\CheckinViewModel.cs" />
+    <Compile Include="ViewModel\CreditCardViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ReservationViewModel.cs" />
+    <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="View\AllReservationListView.xaml.cs">
+      <DependentUpon>AllReservationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChargeView.xaml.cs">
+      <DependentUpon>ChargeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreditCardView.xaml.cs">
+      <DependentUpon>CreditCardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
@@ -104,6 +138,18 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaymentView.xaml.cs">
+      <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReservationView.xaml.cs">
+      <DependentUpon>ReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -129,6 +175,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AllReservationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChargeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreditCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +204,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UsersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,17 +243,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="images\logo.webp" />
-    <None Include="MotelBookingMSDbDataSet.xsc">
-      <DependentUpon>MotelBookingMSDbDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MotelBookingMSDbDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MotelBookingMSDbDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MotelBookingMSDbDataSet.xss">
-      <DependentUpon>MotelBookingMSDbDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -189,13 +256,7 @@
     <Resource Include="images\profile.png" />
     <Resource Include="images\user-solid.svg" />
     <Resource Include="images\DashboardTemplate.png" />
-    <Content Include="MotelBookingMSDb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MotelBookingMSDb_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>MotelBookingMSDb.mdf</DependentUpon>
-    </Content>
+    <Resource Include="Document_reference\UserConfig.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bg.jpg" />
@@ -215,6 +276,22 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Document_reference\Using connectionString to connect database.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Document_reference\DB\CreditCard.sql" />
+    <Content Include="Document_reference\DB\Customer.sql" />
+    <Content Include="Document_reference\DB\Invoice.sql" />
+    <Content Include="Document_reference\DB\Period.sql" />
+    <Content Include="Document_reference\DB\Rate.sql" />
+    <Content Include="Document_reference\DB\RateAdjustment.sql" />
+    <Content Include="Document_reference\DB\Reservation.sql" />
+    <Content Include="Document_reference\DB\Room.sql" />
+    <Content Include="Document_reference\DB\Season.sql" />
+    <Content Include="Document_reference\DB\Spend.sql" />
+    <Content Include="Document_reference\DB\Tax.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

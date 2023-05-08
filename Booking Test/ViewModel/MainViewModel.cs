@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Booking_Test.Model;
 using Booking_Test.Repositories;
+using Booking_Test.View;
 using FontAwesome.Sharp;
 
 namespace Booking_Test.ViewModel
@@ -61,9 +62,21 @@ namespace Booking_Test.ViewModel
             }
         }
 
-        //--> Commands
+        //--> Commands to open a view
         public ICommand ShowHomeViewCommand {get;}
-        public ICommand ShowCustomerViewCommand { get; }
+        public ICommand ShowReservationViewCommand { get; }
+        public ICommand ShowCustomersViewCommand { get; }
+        public ICommand ShowUsersViewCommand { get; }
+        public ICommand ShowAllReservationsListViewCommand { get; }
+        public ICommand ShowChargeViewCommand { get; }
+        public ICommand ShowPaymentViewCommand { get; }
+        public ICommand ShowCalendarViewCommand { get; }
+        public ICommand ShowReportViewCommand { get; }
+
+        //-->Commands without view
+        public ICommand CheckinCommand { get; }
+        public ICommand CheckoutCommand { get; }
+        public ICommand PrintCommand { get; }
 
         public MainViewModel()
         {
@@ -72,7 +85,18 @@ namespace Booking_Test.ViewModel
 
             //Initialize commands
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
-            ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+            ShowReservationViewCommand = new ViewModelCommand(ExecuteShowReservationViewCommand);
+            ShowCustomersViewCommand = new ViewModelCommand(ExecuteShowCustomersViewCommand);
+            ShowUsersViewCommand = new ViewModelCommand(ExecuteShowUsersViewCommand);
+            ShowAllReservationsListViewCommand = new ViewModelCommand(ExecuteShowAllReservationsListViewCommand);
+            ShowChargeViewCommand = new ViewModelCommand(ExecuteShowChargeViewCommand);
+            ShowPaymentViewCommand = new ViewModelCommand(ExecuteShowPaymentViewCommand);
+            ShowCalendarViewCommand = new ViewModelCommand(ExecuteShowCalendarViewCommand);
+            ShowReportViewCommand = new ViewModelCommand(ExecuteShowReportViewCommand);
+
+            CheckinCommand = new ViewModelCommand(ExecuteCheckinCommand);
+            CheckoutCommand = new ViewModelCommand(ExecuteCheckoutCommand);
+            PrintCommand = new ViewModelCommand(ExecutePrintCommand);
 
             //Default view
             ExecuteShowHomeViewCommand(null);
@@ -80,10 +104,57 @@ namespace Booking_Test.ViewModel
             LoadCurrentUserData();
         }
 
-        private void ExecuteShowCustomerViewCommand(object obj)
+        private void ExecuteShowAllReservationsListViewCommand(object obj)
+        {
+            CurrentChildView = new AllReservationsListViewModel();
+            Caption = "Reservation";
+            Icon = IconChar.PhoneVolume;
+        }
+
+        private void ExecuteShowReportViewCommand(object obj)
+        {
+            Window reportWindow = new ReportView();
+            reportWindow.Show();
+        }
+
+        private void ExecuteShowPaymentViewCommand(object obj)
+        {
+            Window paymentWindow = new PaymentView();
+            paymentWindow.Show();
+        }
+
+
+        private void ExecuteShowChargeViewCommand(object obj)
+        {
+            Window chargeWindow = new ChargeView();
+            chargeWindow.Show();
+        }
+
+        private void ExecuteShowCalendarViewCommand(object obj)
+        {
+            Window calendarWindow = new CalendarView();
+            calendarWindow.Show();
+        }
+
+        private void ExecuteShowReservationViewCommand(object obj)
+        {
+            Window reservationWindow = new ReservationView();
+            reservationWindow.Show();
+            Caption = "Reservation";
+            Icon = IconChar.PhoneVolume;
+        }
+
+        private void ExecuteShowUsersViewCommand(object obj)
+        {
+            CurrentChildView = new UsersViewModel();
+            Caption = "Users";
+            Icon = IconChar.User;
+        }
+
+        private void ExecuteShowCustomersViewCommand(object obj)
         {
             CurrentChildView = new CustomerViewModel();
-            Caption = "Customer";
+            Caption = "Customers";
             Icon = IconChar.UserGroup;
         }
 
@@ -99,7 +170,6 @@ namespace Booking_Test.ViewModel
             var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
             {
-
                 CurrentUserAccount.UserName = user.Username;
                 CurrentUserAccount.Displayname = $"{user.Username}, {user.Roll}";
                 CurrentUserAccount.ProfilePicture = null;
@@ -109,6 +179,23 @@ namespace Booking_Test.ViewModel
                 CurrentUserAccount.Displayname = "Invalid user, not logged in!";
                 // Hide child views
             }
+        }
+
+        //Commands no view
+
+        private void ExecuteCheckoutCommand(object obj)
+        {
+
+        }
+
+        private void ExecuteCheckinCommand(object obj)
+        {
+            
+        }
+
+        private void ExecutePrintCommand(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

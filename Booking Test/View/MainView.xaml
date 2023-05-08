@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel}">
 
     <Window.DataContext>
         <viewModel:MainViewModel />
@@ -22,8 +23,16 @@
             <local:HomeView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:AllReservationsListViewModel}">
+            <local:AllReservationListView />
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewModel:CustomerViewModel}">
             <local:CustomerView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:UsersViewModel}">
+            <local:UsersView />
         </DataTemplate>
     </Window.Resources>
 
@@ -40,7 +49,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <!--Navigation menu-->
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="200" />
                 <!-- Content section --> 
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -72,6 +81,7 @@
                     
                     <!--Menu Buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
+                                 Background = "{StaticResource panelActiveColor}"
                                  Tag="{StaticResource color1}"
                                  IsChecked="True"
                                  Command="{Binding ShowHomeViewCommand}">
@@ -85,7 +95,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color2}"
-                                 Command="{Binding ShowCustomerViewCommand}">
+                                 Command="{Binding ShowReservationViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="PhoneVolume" Style="{StaticResource menuButtonIcon}" />
@@ -95,7 +105,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color3}">
+                                 Tag="{StaticResource color3}"
+                                 Command="{Binding CheckinCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Key" Style="{StaticResource menuButtonIcon}" />
@@ -105,7 +116,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color4}">
+                                 Tag="{StaticResource color4}"
+                                 Command="{Binding CheckoutCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Lock" Style="{StaticResource menuButtonIcon}" />
@@ -115,7 +127,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color5}">
+                                 Tag="{StaticResource color5}"
+                                 Command="{Binding ShowCalendarViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Pen" Style="{StaticResource menuButtonIcon}" />
@@ -125,17 +138,19 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color6}">
+                                 Tag="{StaticResource color6}"
+                                 Command="{Binding ShowChargeViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="CartShopping" Style="{StaticResource menuButtonIcon}" />
-                            <TextBlock Text="Orders" Style="{StaticResource menuButtonText}" />
+                            <TextBlock Text="Charges" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
 
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color7}">
+                                 Tag="{StaticResource color7}"
+                                 Command="{Binding ShowPaymentViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="MoneyBill" Style="{StaticResource menuButtonIcon}" />
@@ -145,17 +160,19 @@
                     </RadioButton>
                     
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color8}">
+                                 Tag="{StaticResource color8}"
+                                 Command="{Binding ShowCalendarViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Table" Style="{StaticResource menuButtonIcon}" />
-                            <TextBlock Text="Table" Style="{StaticResource menuButtonText}" />
+                            <fa:IconImage Icon="Calendar" Style="{StaticResource menuButtonIcon}" />
+                            <TextBlock Text="Calendar" Style="{StaticResource menuButtonText}" />
                         </StackPanel>
 
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color9}">
+                                 Tag="{StaticResource color9}"
+                                 Command="{Binding ShowReportViewCommand}">
 
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="PieChart" Style="{StaticResource menuButtonIcon}" />
@@ -235,6 +252,7 @@
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
+                            <ColumnDefinition Width="2*" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         
@@ -256,9 +274,63 @@
                                        VerticalAlignment="Center"/>
 
                         </StackPanel>
-                        
-                        <!--User options-->
+
+                        <!--Caption-->
                         <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal">
+                            <Menu Background="Transparent" VerticalAlignment="Center">
+                                <Menu.ItemsPanel>
+
+                                    <ItemsPanelTemplate>
+
+                                        <VirtualizingStackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                                    </ItemsPanelTemplate>
+
+                                </Menu.ItemsPanel>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Users" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Command="{Binding ShowUsersViewCommand}" Style="{StaticResource TopMenu}" Click="MenuItem_Click" >
+
+                                </MenuItem>
+
+                                <!--Customers-->
+
+                                <MenuItem Header="Customers" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Command="{Binding ShowCustomersViewCommand}" Style="{StaticResource TopMenu}" Click="MenuItem_Click" >
+
+                                </MenuItem>
+
+
+                                <!--Reservations-->
+
+                                <MenuItem Header="All Reservations" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Command="{Binding ShowAllReservationsListViewCommand}" Style="{StaticResource TopMenu}" Click="MenuItem_Click">
+
+                                </MenuItem>
+
+                                <!--Functions-->
+
+                                <MenuItem Header="Functions" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Style="{StaticResource TopMenu}" Click="MenuItem_Click" >
+
+                                </MenuItem>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Integrations" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Style="{StaticResource TopMenu}" Click="MenuItem_Click" >
+
+                                </MenuItem>
+
+                                <!--Users-->
+
+                                <MenuItem Header="Help" Padding="10 5 10 5" Foreground="{StaticResource titleColor2}" Style="{StaticResource TopMenu}" Click="MenuItem_Click" >
+
+                                </MenuItem>
+                            </Menu>
+
+                        </StackPanel>
+
+                        <!--User options-->
+                        <StackPanel Grid.Column="2"
                                     Orientation="Horizontal"
                                     FlowDirection="RightToLeft"
                                     VerticalAlignment="Center"

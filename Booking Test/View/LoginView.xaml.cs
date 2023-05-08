@@ -39,5 +39,15 @@ namespace Booking_Test.View
         {
             Application.Current.Shutdown();
         }
+
+        private void ResetPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void SignUp_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

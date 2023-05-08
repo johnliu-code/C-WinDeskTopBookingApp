@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking_Test.View"
-        xmlns:viewModel="clr-namespace:Booking_Test.ViewModel" xmlns:customcontrols="clr-namespace:Booking_Test.CustomControls"
+        xmlns:viewModel="clr-namespace:Booking_Test.ViewModel" 
+        xmlns:customcontrols="clr-namespace:Booking_Test.CustomControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800"
         WindowStyle="None"
@@ -259,13 +260,21 @@
                                    FontWeight="Medium"
                                    FontFamily="Montserrat"/>
 
-                        <TextBlock Text="Reset"
+                        <TextBlock x:Name="ResetPassword" Text="Reset"
                                    Foreground="White"
                                    FontSize="12"
                                    FontWeight="Medium"
                                    FontFamily="Montserrat"
                                    Cursor="Hand"
-                                   Margin="8,0,0,0"/>
+                                   Margin="8,0,0,0" MouseDown="ResetPassword_MouseDown" />
+
+                        <TextBlock x:Name="signUp" Text="Sign Up"
+                                   Foreground="#FFD21AC7"
+                                   FontSize="12"
+                                   FontWeight="Medium"
+                                   FontFamily="Montserrat"
+                                   Cursor="Hand"
+                                   Margin="8,0,0,0" MouseDown="SignUp_MouseDown" />
                     </StackPanel>
 
                 </StackPanel>

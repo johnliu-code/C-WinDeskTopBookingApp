@@ -59,5 +59,21 @@ namespace Booking_Test.View
             }
             else this.WindowState=WindowState.Normal;
         }
+
+        private MenuItem _checkedMenuItem;
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+
+            if (menuItem != null && menuItem != _checkedMenuItem)
+            {
+                if (_checkedMenuItem != null)
+                {
+                    _checkedMenuItem.IsChecked = false;
+                }
+                menuItem.IsChecked = true;
+                _checkedMenuItem = menuItem;
+            }
+        }
     }
 }

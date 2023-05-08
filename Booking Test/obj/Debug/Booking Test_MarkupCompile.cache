@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\App.xaml
-111721062513
+16821152270
 11-768848896
-431866331018
-16-2145729406
-CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Styles\ButtonStyles.xaml;Styles\UIColors.xaml;View\CreditCardView.xaml;View\CustomerView.xaml;View\HomeView.xaml;View\LoginView.xaml;View\MainView.xaml;View\ReservationView.xaml;View\UsersView.xaml;
+53587900915
+17457428700
+CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Styles\ButtonStyles.xaml;Styles\UIColors.xaml;View\AllReservationListView.xaml;View\CalendarView.xaml;View\ChargeView.xaml;View\CreditCardView.xaml;View\CustomerView.xaml;View\HomeView.xaml;View\LoginView.xaml;View\MainView.xaml;View\PaymentView.xaml;View\ReportView.xaml;View\ReservationView.xaml;View\UsersView.xaml;
 
 False
 

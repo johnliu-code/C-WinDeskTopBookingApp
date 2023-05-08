@@ -6,13 +6,13 @@ create table Spend (
 	price DECIMAL(5,2),
 	constraint FK_SPEND_REFERENCE_RESERVATION foreign key (reservation_id) references Reservation (Id)
 );
-insert into Spend (reservation_id, item, quantity, price) values ('1988457E-A2DA-4A6E-AEC1-052B1208E305', 'Santa Cruz Island Silverhosackia', 10, 102.02);
-insert into Spend (reservation_id, item, quantity, price) values ('F5DBD514-89E8-4C5A-89C1-12F0C66BC4A7', 'Lindheimer''s Crownbeard', 3, 185.82);
-insert into Spend (reservation_id, item, quantity, price) values ('37DF0905-293A-4CC8-B9D2-134604B800A5', 'Arrowfeather Threeawn', 4, 43.23);
-insert into Spend (reservation_id, item, quantity, price) values ('C35DD849-7A23-423D-9842-184282FC44CB', 'Farewell To Spring', 2, 157.63);
-insert into Spend (reservation_id, item, quantity, price) values ('EB640F05-8AF4-4268-B54B-1D2C23DE19DC', 'Kauai Cyrtandra', 7, 114.447);
-insert into Spend (reservation_id, item, quantity, price) values ('ACF578F0-AFA9-4F75-8F26-225CCA1E5DA0', 'Iberian Geranium', 9, 161.29);
-insert into Spend (reservation_id, item, quantity, price) values ('85233991-C12C-41F0-8368-38334B2A4DC4', 'Pingpong-ball Cactus', 2, 72.25);
-insert into Spend (reservation_id, item, quantity, price) values ('DCB1E47D-70C5-44A5-846E-3D3FB0BA66C6', 'Lesser Hawkbit', 10, 194.29);
-insert into Spend (reservation_id, item, quantity, price) values ('5D03ACA2-15E9-4246-A4AA-4DAAFB785B5D', 'Woodland Climbing Bamboo', 6, 150.765);
-insert into Spend (reservation_id, item, quantity, price) values ('452B4DF1-B158-481A-8B05-5868A29919D5', 'Hawkweed Buckwheat', 5, 23.28);
+insert into Spend (reservation_id, item, quantity, price) values ('3704D5E0-96B8-4700-AB4A-01C28DB682E3', 'Santa Cruz Island Silverhosackia', 10, 102.02);
+insert into Spend (reservation_id, item, quantity, price) values ('F7836055-CFEF-4675-991B-07E164D87A1F', 'Lindheimer''s Crownbeard', 3, 185.82);
+insert into Spend (reservation_id, item, quantity, price) values ('2CA55F2A-5720-40E3-8B29-33E946EF3215', 'Arrowfeather Threeawn', 4, 43.23);
+insert into Spend (reservation_id, item, quantity, price) values ('1D0C9F1B-BBD0-4BBF-B8E7-67D5D70B2E8F', 'Farewell To Spring', 2, 157.63);
+insert into Spend (reservation_id, item, quantity, price) values ('2D17A3EA-9266-41AC-A3BB-8DC3F1B13948', 'Kauai Cyrtandra', 7, 114.447);
+insert into Spend (reservation_id, item, quantity, price) values ('9AA0D7EE-AE07-4379-A4FB-99D96828E3D2', 'Iberian Geranium', 9, 161.29);
+insert into Spend (reservation_id, item, quantity, price) values ('2E281E04-171E-4B18-ADFF-A08A52968534', 'Pingpong-ball Cactus', 2, 72.25);
+insert into Spend (reservation_id, item, quantity, price) values ('39A79E67-6233-4098-9DE7-A1873C9FCAB0', 'Lesser Hawkbit', 10, 194.29);
+insert into Spend (reservation_id, item, quantity, price) values ('35C6C283-D659-44F2-8B42-A3C8C3704DAD', 'Woodland Climbing Bamboo', 6, 150.765);
+insert into Spend (reservation_id, item, quantity, price) values ('06E7C0EF-6658-492D-9942-A57CE648A471', 'Hawkweed Buckwheat', 5, 23.28);

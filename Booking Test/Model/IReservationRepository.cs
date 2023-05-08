@@ -15,6 +15,7 @@ namespace Booking_Test.Model
         ReservationModel GetByCheckinDate(DateTime checkindate);
         ObservableCollection<ReservationModel> GetByCustomerId(int id);
         ObservableCollection<ReservationModel> GetAll();
+        ObservableCollection<ReservationDataModel> GetAllReservations(int id);
         ObservableCollection<ReservationModel> Clear();
     }
 }

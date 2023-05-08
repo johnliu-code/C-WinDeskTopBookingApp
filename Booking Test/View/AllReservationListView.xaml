@@ -1,0 +1,166 @@
+﻿<UserControl x:Class="Booking_Test.View.AllReservationListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Booking_Test.View"
+             mc:Ignorable="d" 
+             xmlns:viewModel="clr-namespace:Booking_Test.ViewModel"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModel:AllReservationsListViewModel}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        Grid.Column="0">
+                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
+                <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"   
+                    FontSize="13"
+                         Height="24"
+                           Width="300"
+                           Background="Transparent"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="{StaticResource plainTextColor3}"
+                             CaretBrush="{StaticResource plainTextColor3}"
+                             BorderBrush="{StaticResource plainTextColor3}"
+                             BorderThickness="0,0,0,1"                             
+                             VerticalContentAlignment="Center"
+                             Margin="5,5,0,0" 
+                              >
+                </TextBox>
+
+            </StackPanel>
+            <Button Grid.Column="1"
+                    Command="{Binding ShowAllCustomerCommand}"                            
+                    Content="Search Reservation"                            
+                    FontSize="12"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"
+                    BorderThickness="0"                   
+                    VerticalAlignment="Top"
+                    Style="{StaticResource reservationButton}">
+            </Button>
+        </Grid>
+        <Border Grid.Row="1"
+                Background="#200F53"
+                CornerRadius="10" 
+                Padding="10">
+            <DataGrid x:Name="reservationListDataGrid"
+                        ColumnWidth="*"
+                        Grid.Row="0"
+                        Background="#200F53"
+                        BorderThickness="0"
+                        ItemsSource="{Binding  Reservations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
+                        AutoGenerateColumns="False"
+                        SelectedItem="{Binding SelectedItem,Mode=TwoWay}"                    
+                        >
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#BCBEE0"/>
+                        <Setter Property="Padding" Value="10,0,0,10"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Occupant}" Header="Occupant" />
+                    <DataGridTextColumn Binding="{Binding Title}" Header="Mr. / Ms." />
+                    <DataGridTextColumn Binding="{Binding RoomNumber_id}"  Header="RoomNumber Id"/>
+                    <DataGridTextColumn Binding="{Binding Checkin_date, StringFormat={}{0:dd/MM/yyyy}}"  Header="CheckIn"/>
+                    <DataGridTextColumn Binding="{Binding Checkout_date, StringFormat={}{0:dd/MM/yyyy}}"  Header="CheckOut"/>
+                    <DataGridTextColumn Binding="{Binding Time}"  Header="Time"/>
+                    <DataGridTextColumn Binding="{Binding Num_adults}"  Header="Adults"/>
+                    <DataGridTextColumn Binding="{Binding Num_children}"  Header="Children"/>
+                    <DataGridTextColumn Binding="{Binding Others}"  Header="Others"/>
+                    <DataGridTextColumn Binding="{Binding Agency}" Header="Agency"/>
+                    <DataGridTextColumn Binding="{Binding Vehicle}"  Header="Vehicle"/>
+                    <DataGridTextColumn Binding="{Binding Id}"  Header="Id"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Border>
+        <Grid Grid.Row="2" Margin="0, 20, 0, 0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <TextBlock  Grid.Row="0" Grid.Column="0"  x:Name="textBlockOccupant" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                         Text="Occupant :" VerticalAlignment="Center" Width="120" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"  />
+            <TextBlock  Grid.Row="1" Grid.Column="0" x:Name="textBlockRoomNumberId" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="RoomNumber Id :"  VerticalAlignment="Center" Width="120" Margin="24,0,0,0" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock  Grid.Row="2" Grid.Column="0" x:Name="textBlockCheckoutDate" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Checkout Date :"  VerticalAlignment="Center" Width="120" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock  Grid.Row="3" Grid.Column="0" x:Name="textBlockAdults" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Adults :"  VerticalAlignment="Center" Width="120" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock  Grid.Row="4" Grid.Column="0" x:Name="textBlockAnimals" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Animals :"  VerticalAlignment="Center" Width="120" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock  Grid.Row="5" Grid.Column="0" x:Name="textBlockVehicle" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Vehicle :"  VerticalAlignment="Center" Width="120" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
+
+            <!-- -->
+            <TextBlock Grid.Row="0" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockTitle" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="Title :" VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockCheckinDate" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="Checkin Date :" VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockTime" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Time :"  VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockChildren" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
+                             Text="Children :" VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockAgency" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Agency :"  VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+            <TextBlock Grid.Row="5" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockId" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
+                         Text="Id :"  VerticalAlignment="Center" Width="120" Foreground="#BCBEE0" FontFamily="Montserrat"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxOccupant" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Occupant, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxRoomNumberId" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.RoomNumber_id, UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxCheckoutDate" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Checkout_date, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxAdults" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Num_adults, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="4" Grid.Column="1" x:Name="textBoxAnimals" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Others, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox  Grid.Row="5" Grid.Column="1" x:Name="textBoxVehicle" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Vehicle, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- -->
+            <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBoxTitle" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23"  Text="{Binding CurrentReservation.Title, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="1" Grid.Column="3" x:Name="textBoxCheckinDate" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Checkin_date, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="2" Grid.Column="3" x:Name="textBoxTime" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding CurrentReservation.Time, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="3" Grid.Column="3" x:Name="textBoxChildren" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding CurrentReservation.Num_children, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="4" Grid.Column="3" x:Name="textBoxAgency" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding CurrentReservation.Agency, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="5" Grid.Column="3" x:Name="textBoxId" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding CurrentReservation.Id, UpdateSourceTrigger=PropertyChanged}" />
+
+
+
+            <Button Grid.Row="0" Grid.Column="4" x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center"  Width="100" Height="30"  Command="{Binding AddReservationCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="1" Grid.Column="4" x:Name="btnModify" Content="Modify" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30"   Command="{Binding ModifyReservationCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="2" Grid.Column="4" x:Name="btnDelete" Content="Delete" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding DeleteReservationCommand}" Style="{StaticResource reservationButton}"/>
+            <Button Grid.Row="3" Grid.Column="4" x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding ClearInputsCommand}" Style="{StaticResource reservationButton}" />
+            <Button Grid.Row="4" Grid.Column="4" x:Name="btnSearch" Content="Credit Card" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding OpenCreditCardWindowCommand}" Style="{StaticResource reservationButton}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -104,3 +104,13 @@ E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationV
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReservationView.baml
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CreditCardView.g.cs
 E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CreditCardView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CalendarView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\CalendarView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\AllReservationListView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ChargeView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\PaymentView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReportView.g.cs
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\AllReservationListView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ChargeView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\PaymentView.baml
+E:\CODE\BookTest\C-WinDeskTopBookingApp\Booking Test\obj\Debug\View\ReportView.baml

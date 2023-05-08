@@ -57,7 +57,7 @@
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
-                Padding="10">
+                Padding="20">
             <DataGrid x:Name="reservationListDataGrid"
                 ColumnWidth="*"
                   Background="#200F53"

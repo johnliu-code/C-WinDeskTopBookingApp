@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Diagnostics;
 
 namespace Booking_Test.Repositories
 {
@@ -21,17 +23,20 @@ namespace Booking_Test.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "insert into [Reservation] values (@ID, @customer_id, @room_id,@num_adults,@num_children,@occupant,@checkin_date,@checkout_date, @vehicle, @agency)";
+                command.CommandText = "insert into [Reservation] values (@ID, @customer_id, @room_id,@num_adults,@num_children,@occupant,@checkin_date,@checkout_date, @vehicle, @agency, @title, @others, @time)";
                 command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = reservation.Id;
                 command.Parameters.Add("@customer_id", SqlDbType.Int).Value = reservation.Customer_id;
-                command.Parameters.Add("@room_id", SqlDbType.NVarChar).Value = reservation.Room_id;
+                command.Parameters.Add("@room_id", SqlDbType.NVarChar).Value = reservation.RoomNumber_id;
                 command.Parameters.Add("@num_adults", SqlDbType.Int).Value = reservation.Num_adults;
                 command.Parameters.Add("@num_children", SqlDbType.Int).Value = reservation.Num_children;
                 command.Parameters.Add("@occupant", SqlDbType.NVarChar).Value = reservation.Occupant;
                 command.Parameters.Add("checkin_date", SqlDbType.DateTime).Value = reservation.Checkin_date;
                 command.Parameters.Add("checkout_date", SqlDbType.DateTime).Value = reservation.Checkout_date;
-                command.Parameters.Add("@vehicle", SqlDbType.Int).Value = reservation.Vehicle;
-                command.Parameters.Add("@agency", SqlDbType.Int).Value = reservation.Agency;
+                command.Parameters.Add("@vehicle", SqlDbType.NVarChar).Value = reservation.Vehicle;
+                command.Parameters.Add("@agency", SqlDbType.NVarChar).Value = reservation.Agency;
+                command.Parameters.Add("@title", SqlDbType.NVarChar).Value = reservation.Title;
+                command.Parameters.Add("@others", SqlDbType.NVarChar).Value = reservation.Others;
+                command.Parameters.Add("@time", SqlDbType.NVarChar).Value = reservation.Time;
 
                 command.ExecuteNonQuery();
 
@@ -39,27 +44,30 @@ namespace Booking_Test.Repositories
 
         }
 
-        public void Edit(ReservationModel reservationModel)
+        public void Edit(ReservationModel reservation)
         {
-            var reservation = reservationModel;
             using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {
                 connection.Open();
                 command.Connection = connection;
 
-                command.CommandText = "UPDATE [Reservation] SET customer_id = @customer_id, room_id = @room_id, num_adults = @num_adults, num_children = @num_children, occupant = @occupant, checkin_date = @checkin_date, checkout_date = @checkout_date, vehicle = @vehicle, agency = @agency WHERE ID = @ID";
+                command.CommandText = "UPDATE [Reservation] SET customer_id = @customer_id, roomnumber_id = @roomnumber_id, num_adults = @num_adults, num_children = @num_children, occupant = @occupant, checkin_date = @checkin_date, checkout_date = @checkout_date, vehicle = @vehicle, agency = @agency, title = @title, others = @others, time = @time WHERE ID = @ID";
 
                 command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = reservation.Id;
                 command.Parameters.Add("@customer_id", SqlDbType.Int).Value = reservation.Customer_id;
-                command.Parameters.Add("@room_id", SqlDbType.NVarChar).Value = reservation.Room_id;
+                command.Parameters.Add("@roomnumber_id", SqlDbType.NVarChar).Value = reservation.RoomNumber_id;
                 command.Parameters.Add("@num_adults", SqlDbType.Int).Value = reservation.Num_adults;
                 command.Parameters.Add("@num_children", SqlDbType.Int).Value = reservation.Num_children;
                 command.Parameters.Add("@occupant", SqlDbType.NVarChar).Value = reservation.Occupant;
                 command.Parameters.Add("checkin_date", SqlDbType.DateTime).Value = reservation.Checkin_date;
                 command.Parameters.Add("checkout_date", SqlDbType.DateTime).Value = reservation.Checkout_date;
-                command.Parameters.Add("@vehicle", SqlDbType.Int).Value = reservation.Vehicle;
-                command.Parameters.Add("@agency", SqlDbType.Int).Value = reservation.Agency;
+                command.Parameters.Add("@vehicle", SqlDbType.NVarChar).Value = reservation.Vehicle;
+                command.Parameters.Add("@agency", SqlDbType.NVarChar).Value = reservation.Agency;
+                command.Parameters.Add("@title", SqlDbType.NVarChar).Value = reservation.Title;
+                command.Parameters.Add("@others", SqlDbType.NVarChar).Value = reservation.Others;
+                command.Parameters.Add("@time", SqlDbType.NVarChar).Value = reservation.Time;
+
 
                 command.ExecuteNonQuery();
             }
@@ -89,15 +97,18 @@ namespace Booking_Test.Repositories
                         var reservation = new ReservationModel()
                         {
                             Id = (Guid)reader[0],
-                            Room_id = reader[1].GetHashCode(),
+                            RoomNumber_id = reader[1].GetHashCode(),
                             Customer_id = reader[2].GetHashCode(),
                             Num_adults = reader[3].GetHashCode(),
                             Num_children = reader[4].GetHashCode(),
                             Occupant = reader[5].ToString(),
-                            Checkin_date = reader.GetDateTime(6),
-                            Checkout_date = reader.GetDateTime(7),
+                            Checkin_date = reader.GetDateTime(6).Date,
+                            Checkout_date = reader.GetDateTime(7).Date,
                             Vehicle = reader[8].ToString(),
-                            Agency = reader[9].ToString()
+                            Agency = reader[9].ToString(),
+                            Title = reader[10].ToString(),
+                            Others = reader[11].ToString(),
+                            Time = reader[12].ToString(),
                         };
                         reservations.Add(reservation);
                     }
@@ -121,15 +132,18 @@ namespace Booking_Test.Repositories
                     while (reader.Read())
                     {
                         reservation.Id = (Guid)reader[0];
-                        reservation.Room_id = reader[1].GetHashCode();
+                        reservation.RoomNumber_id = reader[1].GetHashCode();
                         reservation.Customer_id = reader[2].GetHashCode();
                         reservation.Num_adults = reader[3].GetHashCode();
                         reservation.Num_children = reader[4].GetHashCode();
                         reservation.Occupant = reader[5].ToString();
-                        reservation.Checkin_date = reader.GetDateTime(6);
-                        reservation.Checkout_date = reader.GetDateTime(7);
+                        reservation.Checkin_date = reader.GetDateTime(6).Date;
+                        reservation.Checkout_date = reader.GetDateTime(7).Date;
                         reservation.Vehicle = reader[8].ToString();
                         reservation.Agency = reader[9].ToString();
+                        reservation.Title = reader[10].ToString();
+                        reservation.Others = reader[11].ToString();
+                        reservation.Time = reader[12].ToString();
                     }
                 }
             }
@@ -144,7 +158,7 @@ namespace Booking_Test.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "DELETE FROM [Reservation] WHERE reservationId = @reservationId";
+                command.CommandText = "DELETE FROM [Reservation] WHERE reservation_Id = @reservationId";
                 command.Parameters.AddWithValue("@reservationId", reservationid);
                 command.ExecuteNonQuery();
 
@@ -169,21 +183,72 @@ namespace Booking_Test.Repositories
                         var reservation = new ReservationModel()
                         {
                             Id = (Guid)reader[0],
-                            Room_id = reader[1].GetHashCode(),
+                            RoomNumber_id = reader[1].GetHashCode(),
                             Customer_id = reader[2].GetHashCode(),
                             Num_adults = reader[3].GetHashCode(),
                             Num_children = reader[4].GetHashCode(),
                             Occupant = reader[5].ToString(),
-                            Checkin_date = reader.GetDateTime(6),
-                            Checkout_date = reader.GetDateTime(7),
+                            Checkin_date = reader.GetDateTime(6).Date,
+                            Checkout_date = reader.GetDateTime(7).Date,
                             Vehicle = reader[8].ToString(),
-                            Agency = reader[9].ToString()
+                            Agency = reader[9].ToString(),
+                            Title = reader[10].ToString(),
+                            Others = reader[11].ToString(),
+                            Time = reader[12].ToString(),
                         };
                         reservations.Add(reservation);
                     }
                 }
             }
             return reservations;
+        }
+
+        public ObservableCollection<ReservationDataModel> GetAllReservations(int id)
+        {
+            var reservationsDatas = new ObservableCollection<ReservationDataModel>();
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "SELECT Reservation.*, RoomNumber.room_number, Rate.price, Spend.quantity * Spend.price AS packagesTotal, DATEDIFF(day, Reservation.checkin_date, Reservation.checkout_date) AS num_days, Period.* " +
+                    "FROM Reservation " +
+                    "JOIN RoomNumber ON Reservation.roomnumber_id = RoomNumber.id " +
+                    "JOIN Rate ON RoomNumber.room_id = Rate.room_id " +
+                    "JOIN Spend ON Reservation.id = Spend.reservation_id " +
+                    "JOIN Period ON Reservation.checkin_date >= Period.start_date AND Reservation.checkout_date <= Period.end_date AND Period.season_id = Rate.season_id " +
+                    "WHERE customer_id = @id";
+                command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var reservationData = new ReservationDataModel()
+                        {
+                            Id = (Guid)reader[0],
+                            RoomNumber_id = Convert.ToInt32(reader[1]),
+                            Customer_id = Convert.ToInt32(reader[2]),
+                            Num_adults = Convert.ToInt32(reader[3]),
+                            Num_children = Convert.ToInt32(reader[4]),
+                            Occupant = reader[5].ToString(),
+                            Checkin_date = reader.GetDateTime(6).Date,
+                            Checkout_date = reader.GetDateTime(7).Date,
+                            Vehicle = reader[8].ToString(),
+                            Agency = reader[9].ToString(),
+                            Title = reader[10].ToString(),
+                            Others = reader[11].ToString(),
+                            Time = reader[12].ToString(),
+                            Room_number = reader[14].ToString(),
+                            Price = reader.GetDecimal(15),
+                            PackagesTotal = reader.GetDecimal(16),
+                            TotalDays = Convert.ToInt32(reader[17])
+                        };
+
+                        reservationsDatas.Add(reservationData);
+                    }
+                }
+            }
+            return reservationsDatas;
         }
     }
 }

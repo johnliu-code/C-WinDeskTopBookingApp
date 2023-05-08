@@ -77,7 +77,7 @@
         <Border Grid.Row="1"
                 Background="#200F53"
                 CornerRadius="10" 
-                Padding="10">
+                Padding="20">
 
             <Grid>
             <Grid.RowDefinitions>

@@ -55,6 +55,7 @@
       <HintPath>..\packages\FontAwesome.Sharp.6.1.1\lib\net48\FontAwesome.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -79,6 +80,7 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Availability.cs" />
     <Compile Include="Model\CreditCardModel.cs" />
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\ICreditCardRepository.cs" />
@@ -88,8 +90,10 @@
     <Compile Include="Model\PeriodModel.cs" />
     <Compile Include="Model\RateAdjustmentModel.cs" />
     <Compile Include="Model\RateModel.cs" />
+    <Compile Include="Model\ReservationDataModel.cs" />
     <Compile Include="Model\ReservationModel.cs" />
     <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\RoomNumber.cs" />
     <Compile Include="Model\SeasonModel.cs" />
     <Compile Include="Model\SpendModel.cs" />
     <Compile Include="Model\TaxModel.cs" />
@@ -100,6 +104,8 @@
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ReservationRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModel\AllReservationsListViewModel.cs" />
+    <Compile Include="ViewModel\CheckinViewModel.cs" />
     <Compile Include="ViewModel\CreditCardViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
@@ -109,6 +115,15 @@
     <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="View\AllReservationListView.xaml.cs">
+      <DependentUpon>AllReservationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChargeView.xaml.cs">
+      <DependentUpon>ChargeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CreditCardView.xaml.cs">
       <DependentUpon>CreditCardView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +138,12 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaymentView.xaml.cs">
+      <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReservationView.xaml.cs">
       <DependentUpon>ReservationView.xaml</DependentUpon>
@@ -154,6 +175,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AllReservationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChargeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CreditCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +204,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

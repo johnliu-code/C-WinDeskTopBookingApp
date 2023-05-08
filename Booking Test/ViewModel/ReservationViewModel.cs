@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using System.Windows.Input;
 using System.CodeDom.Compiler;
+using System.Windows;
 
 namespace Booking_Test.ViewModel
 {
@@ -22,6 +23,8 @@ namespace Booking_Test.ViewModel
         private string _customerName;
 
         private ObservableCollection<ReservationModel> _reservations;
+        private ObservableCollection<ReservationDataModel> _reservationsDatas;
+
         private ICustomerRepository customerRepository;
         private IReservationRepository reservationRepository;
 
@@ -51,6 +54,16 @@ namespace Booking_Test.ViewModel
             {
                 _reservations = value;
                 OnPropertyChanged(nameof(Reservations));
+            }
+        }
+
+        public ObservableCollection<ReservationDataModel> ReservationsDatas
+        {
+            get => _reservationsDatas;
+            set
+            {
+                _reservationsDatas = value;
+                OnPropertyChanged(nameof(ReservationsDatas));
             }
         }
 
@@ -87,6 +100,7 @@ namespace Booking_Test.ViewModel
         //Commands
         public ICommand GetCustomerCommand { get; }
         public ICommand GetReservationsCommand { get; }
+        public ICommand GetReservationsDatasCommand { get; }
         public ICommand AddReservationCommand { get; }
         public ICommand DeleteReservationCommand { get; }
         public ICommand ModifyReservationCommand { get; }
@@ -103,6 +117,7 @@ namespace Booking_Test.ViewModel
 
             GetCustomerCommand = new ViewModelCommand(ExecuteGetCustomerCommand);
             GetReservationsCommand = new ViewModelCommand(ExecuteGetReservationsCommand);
+            GetReservationsDatasCommand = new ViewModelCommand(ExecuteGetReservationsDatasCommand);
             AddReservationCommand = new ViewModelCommand(ExecuteAddReservationCommand);
             ClearInputsCommand = new ViewModelCommand(ExecuteClearInputsCommand);
             ModifyReservationCommand = new ViewModelCommand(ExecuteModifyReservationCommand);
@@ -111,6 +126,13 @@ namespace Booking_Test.ViewModel
             CustomerName = "Valdemar";
             ExecuteGetCustomerCommand(null);
             ExecuteGetReservationsCommand(null);
+            ExecuteGetReservationsDatasCommand(null);
+        }
+
+        private void ExecuteGetReservationsDatasCommand(object obj)
+        {
+            ReservationsDatas = new ObservableCollection<ReservationDataModel>();
+            ReservationsDatas = reservationRepository.GetAllReservations(19);
         }
 
         private void ExecuteGetCustomerCommand(object obj)

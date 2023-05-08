@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Booking_Test.Model;
 using Booking_Test.Repositories;
+using Booking_Test.View;
 using FontAwesome.Sharp;
 
 namespace Booking_Test.ViewModel
@@ -61,11 +62,21 @@ namespace Booking_Test.ViewModel
             }
         }
 
-        //--> Commands
+        //--> Commands to open a view
         public ICommand ShowHomeViewCommand {get;}
         public ICommand ShowReservationViewCommand { get; }
         public ICommand ShowCustomersViewCommand { get; }
         public ICommand ShowUsersViewCommand { get; }
+        public ICommand ShowAllReservationsListViewCommand { get; }
+        public ICommand ShowChargeViewCommand { get; }
+        public ICommand ShowPaymentViewCommand { get; }
+        public ICommand ShowCalendarViewCommand { get; }
+        public ICommand ShowReportViewCommand { get; }
+
+        //-->Commands without view
+        public ICommand CheckinCommand { get; }
+        public ICommand CheckoutCommand { get; }
+        public ICommand PrintCommand { get; }
 
         public MainViewModel()
         {
@@ -77,6 +88,15 @@ namespace Booking_Test.ViewModel
             ShowReservationViewCommand = new ViewModelCommand(ExecuteShowReservationViewCommand);
             ShowCustomersViewCommand = new ViewModelCommand(ExecuteShowCustomersViewCommand);
             ShowUsersViewCommand = new ViewModelCommand(ExecuteShowUsersViewCommand);
+            ShowAllReservationsListViewCommand = new ViewModelCommand(ExecuteShowAllReservationsListViewCommand);
+            ShowChargeViewCommand = new ViewModelCommand(ExecuteShowChargeViewCommand);
+            ShowPaymentViewCommand = new ViewModelCommand(ExecuteShowPaymentViewCommand);
+            ShowCalendarViewCommand = new ViewModelCommand(ExecuteShowCalendarViewCommand);
+            ShowReportViewCommand = new ViewModelCommand(ExecuteShowReportViewCommand);
+
+            CheckinCommand = new ViewModelCommand(ExecuteCheckinCommand);
+            CheckoutCommand = new ViewModelCommand(ExecuteCheckoutCommand);
+            PrintCommand = new ViewModelCommand(ExecutePrintCommand);
 
             //Default view
             ExecuteShowHomeViewCommand(null);
@@ -84,9 +104,42 @@ namespace Booking_Test.ViewModel
             LoadCurrentUserData();
         }
 
+        private void ExecuteShowAllReservationsListViewCommand(object obj)
+        {
+            CurrentChildView = new AllReservationsListViewModel();
+            Caption = "Reservation";
+            Icon = IconChar.PhoneVolume;
+        }
+
+        private void ExecuteShowReportViewCommand(object obj)
+        {
+            Window reportWindow = new ReportView();
+            reportWindow.Show();
+        }
+
+        private void ExecuteShowPaymentViewCommand(object obj)
+        {
+            Window paymentWindow = new PaymentView();
+            paymentWindow.Show();
+        }
+
+
+        private void ExecuteShowChargeViewCommand(object obj)
+        {
+            Window chargeWindow = new ChargeView();
+            chargeWindow.Show();
+        }
+
+        private void ExecuteShowCalendarViewCommand(object obj)
+        {
+            Window calendarWindow = new CalendarView();
+            calendarWindow.Show();
+        }
+
         private void ExecuteShowReservationViewCommand(object obj)
         {
-            CurrentChildView = new ReservationViewModel();
+            Window reservationWindow = new ReservationView();
+            reservationWindow.Show();
             Caption = "Reservation";
             Icon = IconChar.PhoneVolume;
         }
@@ -126,6 +179,23 @@ namespace Booking_Test.ViewModel
                 CurrentUserAccount.Displayname = "Invalid user, not logged in!";
                 // Hide child views
             }
+        }
+
+        //Commands no view
+
+        private void ExecuteCheckoutCommand(object obj)
+        {
+
+        }
+
+        private void ExecuteCheckinCommand(object obj)
+        {
+            
+        }
+
+        private void ExecutePrintCommand(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

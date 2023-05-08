@@ -8,161 +8,527 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="CalendarItemTemplate1" TargetType="{x:Type CalendarItem}">
+            <ControlTemplate.Resources>
+                <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                    <TextBlock Foreground="#FF333333" FontFamily="Verdana" FontWeight="Bold" FontSize="9.5" HorizontalAlignment="Center" Margin="0,6,0,6" Text="{Binding}" VerticalAlignment="Center"/>
+                </DataTemplate>
+            </ControlTemplate.Resources>
+            <Grid x:Name="PART_Root">
+                <Grid.Resources>
+                    <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF"/>
+                </Grid.Resources>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Disabled">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" To="1" Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1">
+                    <Border BorderBrush="#FFFFFFFF" BorderThickness="2" CornerRadius="1">
+                        <Grid>
+                            <Grid.Resources>
+                                <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="path" To="#FF73A9D8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="path" To=".5" Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
+                                        <Grid>
+                                            <Path x:Name="path" Data="M288.75,232.25 L288.75,240.625 L283,236.625 z" Fill="#FF333333" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                                <ControlTemplate x:Key="NextButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="path" To="#FF73A9D8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="path" To=".5" Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
+                                        <Grid>
+                                            <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="#FF333333" HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                                <ControlTemplate x:Key="HeaderButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="buttonContent" To="#FF73A9D8" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="buttonContent" To=".5" Storyboard.TargetProperty="Opacity"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="#FF333333" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="PART_PreviousButton" Grid.Column="0" Focusable="False" HorizontalAlignment="Left" Height="20" Grid.Row="0" Template="{StaticResource PreviousButtonTemplate}" Width="28"/>
+                            <Button x:Name="PART_HeaderButton" Grid.Column="1" Focusable="False" FontWeight="Bold" FontSize="10.5" HorizontalAlignment="Center" Grid.Row="0" Template="{StaticResource HeaderButtonTemplate}" VerticalAlignment="Center"/>
+                            <Button x:Name="PART_NextButton" Grid.Column="2" Focusable="False" HorizontalAlignment="Right" Height="20" Grid.Row="0" Template="{StaticResource NextButtonTemplate}" Width="28"/>
+                            <Grid x:Name="PART_MonthView" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="6,-1,6,6" Grid.Row="1" Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                            <Grid x:Name="PART_YearView" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="6,-3,7,6" Grid.Row="1" Visibility="Hidden">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+                <Rectangle x:Name="PART_DisabledVisual" Fill="{StaticResource DisabledColor}" Opacity="0" RadiusX="2" RadiusY="2" Stroke="{StaticResource DisabledColor}" Stretch="Fill" StrokeThickness="1" Visibility="Collapsed"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Visibility" TargetName="PART_DisabledVisual" Value="Visible"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Year">
+                    <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
+                    <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Decade">
+                    <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
+                    <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                        <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                        <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
+                        <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                        <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                        <GradientStop Color="#FF718597" Offset="0.375"/>
+                        <GradientStop Color="#FF617584" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
+                            <CalendarItem Template="{DynamicResource CalendarItemTemplate1}" x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Style="{TemplateBinding CalendarItemStyle}"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+       
+        <!-- main body section -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Grid.Column="0" Height="35">
-
-                <DatePicker Height="23" Width="111" Margin="20,0,0,0"/>
-                <DatePicker Height="23" Width="111" Margin="5,0,0,0"/>
-                <Button Content="Today" Height="25" Width="74" Margin="5,0,0,0" />
-                <Button Content="This Week" Height="25" Width="74" Margin="5,0,0,0"/>
-                <Button Content="This Month" Height="25" Width="74" Margin="5,0,0,0"/>
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
-                <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"   
-                    FontSize="13"
-                    Height="24"
-                    Width="100"
-                    Background="Transparent"
-                    FontWeight="Medium"
-                    FontFamily="Montserrat"                            
-                    Foreground="{StaticResource plainTextColor3}"
-                    CaretBrush="{StaticResource plainTextColor3}"
-                    BorderBrush="{StaticResource plainTextColor3}"
-                    BorderThickness="0,0,0,1"                             
-                    VerticalContentAlignment="Center"
-                    Margin="5,5,0,0" 
-                    >
-                </TextBox>
-                <Button 
-                    Command="{Binding ShowAllCustomerCommand}"                            
-                    Content="Search"                            
-                    FontSize="12"
-                    FontFamily="Montserrat"
-                    Cursor="Hand"
-                    BorderThickness="0"
-                    Width="120"       
-                    VerticalAlignment="Center"
-                    Style="{StaticResource reservationButton}"
-                    Margin="0,0,20,0">
-                </Button>
-            </StackPanel>
-        </Grid>
-        <Border Grid.Row="1"
+            <!-- Room Booking States section -->
+            <Border Grid.Column="0"
                 Background="#200F53"
                 CornerRadius="10" 
-                Padding="10">
-            <DataGrid x:Name="reservationListDataGrid"
-                ColumnWidth="*"
-                  Background="#200F53"
-                  BorderThickness="0"
-                  ItemsSource="{Binding Customers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  
-                  AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
-                  >
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="#BCBEE0"/>
-                        <Setter Property="Padding" Value="10,0,0,10"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
+                Padding="10"
+                Margin="0,5,5,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <!-- Headers-->
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="No." x:Name="txbNumber" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Room Number" x:Name="txbRooms" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="2" Grid.Row="0" Text="Occupant" x:Name="txbOccupant" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="3" Grid.Row="0" Text="State" x:Name="txbState" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="4" Grid.Row="0" Text="Time" x:Name="txbTime" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <!-- Numbers-->
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="1" x:Name="txbNumber1" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="2" x:Name="txbNumber2" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="3" x:Name="txbNumber3" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="4" x:Name="txbNumber4" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="5" x:Name="txbNumber5" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="6" x:Name="txbNumber6" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="7" x:Name="txbNumber7" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="8" x:Name="txbNumber8" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="9" Text="9" x:Name="txbNumber9" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="10" Text="10" x:Name="txbNumber10" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="11" Text="11" x:Name="txbNumber11" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="12" Text="12" x:Name="txbNumber12" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="13" Text="13" x:Name="txbNumber13" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="0" Grid.Row="14" Text="14" x:Name="txbNumber14" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" Width="50" CanUserResize="False" FontSize="16" />
-                    <DataGridTextColumn Binding="{Binding First_name}" Header="First name"/>
-                    <DataGridTextColumn Binding="{Binding Last_name}"  Header="Last name"/>
-                    <DataGridTextColumn Binding="{Binding Title}"  Header="Title"/>
-                    <DataGridTextColumn Binding="{Binding Phone}"  Header="Phone" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding Email}"  Header="Email" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding Street}"  Header="Street" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding City}"  Header="City"/>
-                    <DataGridTextColumn Binding="{Binding State}"  Header="State"/>
-                    <DataGridTextColumn Binding="{Binding Country}"  Header="Country"/>
-                    <DataGridTextColumn Binding="{Binding Postal_code}"  Header="Post"/>
-                </DataGrid.Columns>
+                    <!-- Room Numbers -->
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="1Q-1" x:Name="txbRoomNumber01" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="1Q-2" x:Name="txbRoomNumber02" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="1Q-3" x:Name="txbRoomNumber03" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="1Q1DS-1" x:Name="txbRoomNumber04" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="1Q1DS-2" x:Name="txbRoomNumber05" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="1Q1DS-3" x:Name="txbRoomNumber06" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="2D-1" x:Name="txbRoomNumber07" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="2D-2" x:Name="txbRoomNumber08" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="9" Text="2D-3" x:Name="txbRoomNumber09" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="10" Text="2Q-1" x:Name="txbRoomNumber010" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="11" Text="2Q-2" x:Name="txbRoomNumber011" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="12" Text="OmegaS-1" x:Name="txbRoomNumber012" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="13" Text="YamaskaS-1" x:Name="txbRoomNumber013" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+                    <TextBlock Grid.Column="1" Grid.Row="14" Text="Romanticas-1" x:Name="txbRoomNumber014" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
 
-            </DataGrid>
+                </Grid>
+            </Border>
+            <!-- Control bar section -->
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        </Border>
-        <Grid Grid.Row="2" Margin="0, 20, 0, 0">
+                <Border Grid.Row="0"
+                        Background="#200F53"
+                        CornerRadius="10" 
+                        Padding="10"
+                        Margin="0,5,5,0">
+                    <Calendar Style="{DynamicResource CalendarStyle1}" Height="NaN"/>
 
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-                <RowDefinition  Height="*"/>
-            </Grid.RowDefinitions>
+                </Border>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
+                <Border Grid.Row="1"
+                        Background="#200F53"
+                        CornerRadius="10" 
+                        Padding="10"
+                        Margin="0,5,5,0">
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Note of Reservation"
+                            FontSize="13"
+                            Height="24"
+                            Foreground="#BCBEE0"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat" 
+                            Margin="10"
+                            HorizontalAlignment="Center"/>
+                        <RichTextBox Height="260" Width="260" Padding="10"/>
+                    </StackPanel>
+                </Border>
 
-            </Grid.ColumnDefinitions>
+            </Grid>
 
-            <TextBlock  Grid.Row="0" Grid.Column="0"  x:Name="textBlockLastName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
-                         Text="Last Name :" VerticalAlignment="Center" Width="66" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"  />
-            <TextBlock  Grid.Row="1" Grid.Column="0" x:Name="textBlockAddress" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Phone :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock  Grid.Row="2" Grid.Column="0" x:Name="textBlockTitle" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Title :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock  Grid.Row="3" Grid.Column="0" x:Name="textBlockRoomNumber" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="City :"  VerticalAlignment="Center" Width="86" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock  Grid.Row="4" Grid.Column="0" x:Name="textBlockNotes" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Country :"  VerticalAlignment="Center" Width="56" Margin="24,0,0,0"  Foreground="#BCBEE0" FontFamily="Montserrat"/>
-
-            <!-- -->
-            <TextBlock Grid.Row="0" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockFirstName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
-                             Text="First Name :" VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
-                             Text="Email :" VerticalAlignment="Center" Width="54" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPhone" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Address :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock Grid.Row="3" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockState" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" 
-                             Text="State :" VerticalAlignment="Center" Width="54" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-            <TextBlock Grid.Row="4" Grid.Column="2" Margin="24,0,0,0" x:Name="textBlockPost" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" 
-                         Text="Post Code :"  VerticalAlignment="Center" Width="64" Foreground="#BCBEE0" FontFamily="Montserrat"/>
-
-            <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLastName" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Last_name, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="textBoxPhone" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Phone, UpdateSourceTrigger=PropertyChanged}"  />
-            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="textBoxNumber" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Title, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="3" Grid.Column="1" x:Name="textBoxCity" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.City, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox  Grid.Row="4" Grid.Column="1" x:Name="textBoxCountry" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Country, UpdateSourceTrigger=PropertyChanged}" />
-            <!-- -->
-            <TextBox Grid.Row="0" Grid.Column="3" x:Name="textBoxFirstName" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23"  Text="{Binding Customer.First_name, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="1" Grid.Column="3" x:Name="textBoxEmail" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.Email, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="2" Grid.Column="3" x:Name="textBoxAddress" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Customer.Street, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="3" Grid.Column="3" x:Name="textBoxState" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Width="220" Height="23" Text="{Binding Customer.State, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Row="4" Grid.Column="3" x:Name="textBoxPost" HorizontalAlignment="Left"  TextWrapping="Wrap"  VerticalAlignment="Center"  Width="220" Height="23" Text="{Binding Customer.Postal_code, UpdateSourceTrigger=PropertyChanged}" />
-
-
-            <Button Grid.Row="0" Grid.Column="4" x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="20,0,0,0"  VerticalAlignment="Center"  Width="100" Height="30"  Command="{Binding AddCustomerCommand}" Style="{StaticResource reservationButton}" />
-            <Button Grid.Row="1" Grid.Column="4" x:Name="btnModify" Content="Modify" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30"   Command="{Binding ModifyCustomerCommand}" Style="{StaticResource reservationButton}"/>
-            <Button Grid.Row="2" Grid.Column="4" x:Name="btnDelete" Content="Delete" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding DeleteCustomerCommand}" Style="{StaticResource reservationButton}"/>
-            <Button Grid.Row="3" Grid.Column="4" x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Width="100" Height="30" Command="{Binding ClearInputsCommand}" Style="{StaticResource reservationButton}" />
-            <Button Grid.Row="4" Grid.Column="4" x:Name="btnSearch" Content="Credit Card" Margin="20,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" Height="30" Command="{Binding OpenCreditCardWindowCommand}" Style="{StaticResource reservationButton}"/>
+            <!-- Customer Invoice section -->
+            <Border Grid.Column="2"
+                Background="#200F53"
+                CornerRadius="10" 
+                Padding="10"
+                Margin="0,5,0,0">
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Invoice Block..." x:Name="txbInvoice" 
+                        FontSize="13"
+                        Height="24"
+                        Width="100"
+                        Foreground="#BCBEE0"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+            </Border>
         </Grid>
-
     </Grid>
 </UserControl>

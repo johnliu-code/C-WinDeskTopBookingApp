@@ -10,8 +10,9 @@ create table Reservation (
 	vehicle VARCHAR(50),
 	agency VARCHAR(50),
 	title VARCHAR(50),
-	animals VARCHAR(50),
+	others VARCHAR(50),
 	time VARCHAR(50),
+	create_at Date,
 	constraint FK_RESERVATION_REFERENCE_ROOMNUMBER foreign key ( roomnumber_id) references RoomNumber (Id),
     constraint FK_RESERVATION_REFERENCE_CUSTOMER foreign key (customer_id) references Customer (Id),
 );
